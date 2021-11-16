@@ -5,6 +5,15 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:icon="@android:drawable/ic_lock_idle_lock"
+            android:title="@string/txt_entrar" />
+        <item
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="@string/txt_entregas" />
+        <item
+            android:icon="@android:drawable/ic_lock_power_off"
+            android:title="@string/txt_sair" />
+        <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
