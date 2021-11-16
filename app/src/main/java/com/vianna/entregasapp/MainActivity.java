@@ -31,6 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vianna.entregasapp.databinding.ActivityMainBinding;
+import com.vianna.entregasapp.model.dto.UserDTO;
 import com.vianna.entregasapp.ui.entregas.EntregasFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //----------------------inicio
     NavigationView navigationView;
     TextView cpNome, cpEmail;
-    /*DESCOMENTAR
     UserDTO userLogado;
-    */
     //----------------------fim
 
 
@@ -104,11 +103,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                if(item.getItemId() == R.id.nav_entrar){//se o botao nav_login for clicado...
+                if(item.getItemId() == R.id.nav_entrar_all){//se o botao nav_login for clicado...
                     Intent itt = new Intent(getApplicationContext(), LoginActivity.class);
 
                     viewLoginActivity.launch(itt);
-
 //                } else if (item.getItemId() == R.id.nav_home){
 //                    HomeFragment home = new HomeFragment();//cria o fragmento que vai ser chamado
 //
@@ -129,13 +127,17 @@ public class MainActivity extends AppCompatActivity {
 //                    changeFragment(gal);//chama o metodo qu faz a troca do fragment
 //
 ////                    testeRetrofit();
+                } else if (item.getItemId() == R.id.nav_add_entrega){//nova entrega
+                    Intent itt = new Intent(getApplicationContext(), CadNovaEntregaActivity.class);
 
-                } else if (item.getItemId() == R.id.nav_entregas){
+                    viewCadEntregaActivity.launch(itt);
+
+                } else if (item.getItemId() == R.id.nav_entregas){//tela d elista de entregas
                     EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
 
                     changeFragment(ent);//chama o metodo qu faz a troca do fragment
 
-                } else if (item.getItemId() == R.id.nav_sair){
+                } else if (item.getItemId() == R.id.nav_sair_all){
                     atualizaMenuDeslogado();
 
                     //shared prefs ao sair
@@ -147,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "Até mais!",
                             Toast.LENGTH_SHORT).show();
+
+                    finish();
                 }
 
                 DrawerLayout drawer = binding.drawerLayout;//drawer é o menuzinho com as opções
@@ -176,13 +180,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Bem-vindo!",
                                 Toast.LENGTH_SHORT).show();
 
-                        HomeFragment home = new HomeFragment();//cria o fragmento que vai ser chamado
+                        EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
 
                         Bundle args = new Bundle();//cria um bundle para armazenar argumentos
                         args.putString("nome", "Zezin da Silva");//cria um novo argumento chamado nome
-                        home.setArguments(args);//coloca os argumentos no fragmento
+                        ent.setArguments(args);//coloca os argumentos no fragmento
 
-                        changeFragment(home);//chama o metodo qu faz a troca do fragment
+                        changeFragment(ent);//chama o metodo qu faz a troca do fragment
                     } else if (result.getResultCode() == 15){
                         userLogado = null;
                         Toast.makeText(getApplicationContext(), "Login ou Senha incorreta",
@@ -194,20 +198,48 @@ public class MainActivity extends AppCompatActivity {
     //----------------------fim
 
     //----------------------inicio
+    ActivityResultLauncher<Intent> viewCadEntregaActivity = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    Log.i("LOGIN", "onActivityResult:  Nova entrega retorno - "+result.getResultCode());
+
+                    if (result.getResultCode() == 10){
+//                        userLogado = (UserDTO) result.getData().getExtras().getSerializable("userLogado");
+
+                        Toast.makeText(getApplicationContext(), "Entrega solicitada com sucesso!",
+                                Toast.LENGTH_SHORT).show();
+
+                        EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
+
+                        changeFragment(ent);//chama o metodo qu faz a troca do fragment
+                    } else if (result.getResultCode() == 15){
+                        userLogado = null;
+                        Toast.makeText(getApplicationContext(), "Erro ao solicitar entrega",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+    );
+    //----------------------fim
+
+    //----------------------inicio
     private void atualizaMenuLogado(UserDTO userLogado) {
-        navigationView.getMenu().findItem(R.id.nav_entrar).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_entrar_all).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_entregas).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_sair).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_filmes).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_add_entrega).setVisible(true);
 
         cpNome.setText(userLogado.getNome());
         cpEmail.setText(userLogado.getEmail());
     }
 
     private void atualizaMenuDeslogado() {
-        navigationView.getMenu().findItem(R.id.nav_entrar).setVisible(true);//nao faz nada
-        navigationView.getMenu().findItem(R.id.nav_entregas).setVisible(false);//buga o menu
-        navigationView.getMenu().findItem(R.id.nav_sair).setVisible(false);//funciona
+        navigationView.getMenu().findItem(R.id.nav_entrar_all).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_entregas).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_add_entrega).setVisible(false);
 
         cpNome.setText(getResources().getString(R.string.nav_header_title));//coloca o texto que está no strings.xml
         cpEmail.setText(getResources().getString(R.string.nav_header_subtitle));//coloca o texto que está no strings.xml

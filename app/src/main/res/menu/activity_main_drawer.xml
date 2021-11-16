@@ -3,30 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <menu />
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_entrar"
+            android:id="@+id/nav_entrar_all"
             android:icon="@android:drawable/ic_lock_idle_lock"
             android:title="@string/txtEntrar" />
+        <item
+            android:id="@+id/nav_add_entrega"
+            android:icon="@android:drawable/stat_notify_more"
+            android:title="@string/txtAddEntrega" />
         <item
             android:id="@+id/nav_entregas"
             android:icon="@android:drawable/ic_dialog_dialer"
             android:title="@string/txtentregas" />
         <item
-            android:id="@+id/nav_sair"
+            android:id="@+id/nav_sair_all"
+            android:checkable="false"
             android:icon="@android:drawable/ic_lock_power_off"
             android:title="@string/txtsair" />
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_home"
+            android:visible="false" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_gallery"
+            android:visible="false" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_slideshow"
+            android:visible="false" />
     </group>
+    <group />
 </menu>

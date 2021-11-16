@@ -11,9 +11,10 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="txtEntrar">Entrar</string>
-    <string name="txtentregas">Entregas</string>
+    <string name="txtentregas">Minhas Entregas</string>
     <string name="txtsair">Sair</string>
     <string name="txtLogar">Entrar</string>
     <string name="txtUsuario">Usuario</string>
     <string name="txtSenha">Senha</string>
+    <string name="txtAddEntrega">Nova Entrega</string>
 </resources>

@@ -17,7 +17,7 @@ import com.vianna.entregasapp.R;
 
 public class EntregasFragment extends Fragment {
 
-    TextView mensagem;
+//    TextView mensagem;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class EntregasFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        mensagem = getActivity().findViewById(R.id.text_home);//binding
+//        mensagem = getActivity().findViewById(R.id.text_home);//binding
 
-        mensagem.setText(getArguments().getString("nome"));//pega o "nome" que foi passado via arguments da MainActivity e coloca no campo de id text_home
+//        mensagem.setText(getArguments().getString("nome"));//pega o "nome" que foi passado via arguments da MainActivity e coloca no campo de id text_home
     }
 
 }
