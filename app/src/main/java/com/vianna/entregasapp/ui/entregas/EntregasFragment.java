@@ -11,28 +11,33 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.vianna.entregasapp.R;
 
 public class EntregasFragment extends Fragment {
 
-    private EntregasViewModel mViewModel;
+    TextView mensagem;
 
-    public static EntregasFragment newInstance() {
-        return new EntregasFragment();
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.fragment_entregas, container, false);//define qual fragment será carregada ao abrir
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_entregas, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(EntregasViewModel.class);
-        // TODO: Use the ViewModel
+    public void onStart() {
+        super.onStart();
+
+        mensagem = getActivity().findViewById(R.id.text_home);//binding
+
+        mensagem.setText(getArguments().getString("nome"));//pega o "nome" que foi passado via arguments da MainActivity e coloca no campo de id text_home
     }
 
 }

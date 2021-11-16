@@ -31,6 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vianna.entregasapp.databinding.ActivityMainBinding;
+import com.vianna.entregasapp.ui.entregas.EntregasFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -103,37 +104,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                if(item.getItemId() == R.id.nav_login){//se o botao nav_login for clicado...
+                if(item.getItemId() == R.id.nav_entrar){//se o botao nav_login for clicado...
                     Intent itt = new Intent(getApplicationContext(), LoginActivity.class);
 
                     viewLoginActivity.launch(itt);
 
-                } else if (item.getItemId() == R.id.nav_home){
-                    HomeFragment home = new HomeFragment();//cria o fragmento que vai ser chamado
+//                } else if (item.getItemId() == R.id.nav_home){
+//                    HomeFragment home = new HomeFragment();//cria o fragmento que vai ser chamado
+//
+//                    Bundle args = new Bundle();//cria um bundle para armazenar argumentos
+//                    args.putString("nome", "Zezin da Silva");//cria um novo argumento chamado nome
+//                    home.setArguments(args);//coloca os argumentos no fragmento
+//
+//                    changeFragment(home);//chama o metodo qu faz a troca do fragment
+//
+//                } else if (item.getItemId() == R.id.nav_filmes){
+//
+//                    GalleryFragment gal = new GalleryFragment();//cria o fragmento que vai ser chamado
+//
+//                    Bundle args = new Bundle();//cria um bundle para armazenar argumentos
+//                    args.putString("token", userLogado.getToken());//cria um novo argumento chamado nome
+//                    gal.setArguments(args);//coloca os argumentos no fragmento
+//
+//                    changeFragment(gal);//chama o metodo qu faz a troca do fragment
+//
+////                    testeRetrofit();
 
-                    Bundle args = new Bundle();//cria um bundle para armazenar argumentos
-                    args.putString("nome", "Zezin da Silva");//cria um novo argumento chamado nome
-                    home.setArguments(args);//coloca os argumentos no fragmento
+                } else if (item.getItemId() == R.id.nav_entregas){
+                    EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
 
-                    changeFragment(home);//chama o metodo qu faz a troca do fragment
-
-                } else if (item.getItemId() == R.id.nav_filmes){
-
-                    GalleryFragment gal = new GalleryFragment();//cria o fragmento que vai ser chamado
-
-                    Bundle args = new Bundle();//cria um bundle para armazenar argumentos
-                    args.putString("token", userLogado.getToken());//cria um novo argumento chamado nome
-                    gal.setArguments(args);//coloca os argumentos no fragmento
-
-                    changeFragment(gal);//chama o metodo qu faz a troca do fragment
-
-//                    testeRetrofit();
+                    changeFragment(ent);//chama o metodo qu faz a troca do fragment
 
                 } else if (item.getItemId() == R.id.nav_sair){
                     atualizaMenuDeslogado();
 
                     //shared prefs ao sair
-                    SharedPreferences prefs = getSharedPreferences("filmesApp",MODE_PRIVATE);
+                    SharedPreferences prefs = getSharedPreferences("entregasApp",MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = prefs.edit();
                     prefsEditor.remove("token");
                     prefsEditor.commit();
@@ -189,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
 
     //----------------------inicio
     private void atualizaMenuLogado(UserDTO userLogado) {
-        navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_critica).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_entrar).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_entregas).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_sair).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_filmes).setVisible(true);
 
@@ -199,10 +205,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void atualizaMenuDeslogado() {
-        navigationView.getMenu().findItem(R.id.nav_login).setVisible(true);//nao faz nada
-        navigationView.getMenu().findItem(R.id.nav_critica).setVisible(false);//buga o menu
+        navigationView.getMenu().findItem(R.id.nav_entrar).setVisible(true);//nao faz nada
+        navigationView.getMenu().findItem(R.id.nav_entregas).setVisible(false);//buga o menu
         navigationView.getMenu().findItem(R.id.nav_sair).setVisible(false);//funciona
-        navigationView.getMenu().findItem(R.id.nav_filmes).setVisible(false);
 
         cpNome.setText(getResources().getString(R.string.nav_header_title));//coloca o texto que está no strings.xml
         cpEmail.setText(getResources().getString(R.string.nav_header_subtitle));//coloca o texto que está no strings.xml
@@ -232,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //----------------------fim
-    
+
 
 
 

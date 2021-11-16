@@ -10,7 +10,10 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="txt_entrar">Entrar</string>
-    <string name="txt_entregas">Entregas</string>
-    <string name="txt_sair">Sair</string>
+    <string name="txtEntrar">Entrar</string>
+    <string name="txtentregas">Entregas</string>
+    <string name="txtsair">Sair</string>
+    <string name="txtLogar">Entrar</string>
+    <string name="txtUsuario">Usuario</string>
+    <string name="txtSenha">Senha</string>
 </resources>
