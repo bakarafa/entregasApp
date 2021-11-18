@@ -12,16 +12,19 @@
         <item
             android:id="@+id/nav_add_entrega"
             android:icon="@android:drawable/stat_notify_more"
-            android:title="@string/txtAddEntrega" />
+            android:title="@string/txtAddEntrega"
+            android:visible="false" />
         <item
             android:id="@+id/nav_entregas"
             android:icon="@android:drawable/ic_dialog_dialer"
-            android:title="@string/txtentregas" />
+            android:title="@string/txtentregas"
+            android:visible="false" />
         <item
             android:id="@+id/nav_sair_all"
             android:checkable="false"
             android:icon="@android:drawable/ic_lock_power_off"
-            android:title="@string/txtsair" />
+            android:title="@string/txtsair"
+            android:visible="false" />
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"

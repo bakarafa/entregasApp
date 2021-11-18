@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("LOGIN", "onActivityResult:  Nova entrega retorno - "+result.getResultCode());
 
                     if (result.getResultCode() == 10){
-//                        userLogado = (UserDTO) result.getData().getExtras().getSerializable("userLogado");
+                        userLogado = (UserDTO) result.getData().getExtras().getSerializable("userLogado");
 
                         Toast.makeText(getApplicationContext(), "Entrega solicitada com sucesso!",
                                 Toast.LENGTH_SHORT).show();
@@ -254,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
     private void vinculo() {
         cpNome =  navigationView.getHeaderView(0).findViewById(R.id.nhNome);
         cpEmail =  navigationView.getHeaderView(0).findViewById(R.id.nhEmail);
-
     }
     //----------------------fim
 
@@ -266,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
                 frag);//qual fragmento será inserido
 
         transaction.commit();
-
     }
     //----------------------fim
 
