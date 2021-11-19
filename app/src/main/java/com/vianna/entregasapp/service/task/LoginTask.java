@@ -40,7 +40,7 @@ public class LoginTask extends AsyncTask<InputLoginDTO, Void, UserDTO> {
 
             // Sets the request method for the URL
             httpURLConnection.setRequestMethod("POST");
-//            httpURLConnection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 //            httpURLConnection.setRequestProperty("Accept","application/json");
 
             //Login e senha da aplicação
@@ -70,6 +70,7 @@ public class LoginTask extends AsyncTask<InputLoginDTO, Void, UserDTO> {
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
             // Writes out a byte to the underlying output stream of the data posted from .execute function
             wr.write(paramBytes);
+
             // Flushes the jsonParam to the output stream
             wr.flush();
             wr.close();
