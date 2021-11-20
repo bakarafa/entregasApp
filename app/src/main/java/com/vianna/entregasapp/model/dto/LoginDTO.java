@@ -6,8 +6,8 @@ public class LoginDTO implements Serializable {
 
     private String access_token, refresh_token, nome, email, ROLE;
 
-    public  String getToken(){
-        return "Bearer "+access_token;
+    public  String getBearerToken(){
+        return "Bearer "+access_token;//palavra "Bearer " seguido do token
     }
 
     public LoginDTO() {

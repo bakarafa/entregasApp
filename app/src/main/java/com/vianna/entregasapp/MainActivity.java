@@ -3,6 +3,7 @@ package com.vianna.entregasapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -145,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     //shared prefs ao sair
                     SharedPreferences prefs = getSharedPreferences("entregasApp",MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = prefs.edit();
-                    prefsEditor.remove("token");
+                    prefsEditor.remove("accessToken");
                     prefsEditor.commit();
                     //
 
@@ -174,13 +178,21 @@ public class MainActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     Log.i("LOGIN", "onActivityResult:  Login retorno - "+result.getResultCode());
 
+
                     if (result.getResultCode() == 10){
                         userLogado = (LoginDTO) result.getData().getExtras().getSerializable("userLogado");
 
-                        atualizaMenuLogado(userLogado);
-
+                        //shared prefs ao logar
+                        SharedPreferences prefs = getSharedPreferences("entregasApp",MODE_PRIVATE);
+                        SharedPreferences.Editor prefsEditor = prefs.edit();
+                        prefsEditor.putString("accessToken", userLogado.getAccess_token());
+                        prefsEditor.commit();
+                        //
+                        Log.i("TOKEN", "ACESS TOKEN DO USUARIO LOGADO "+userLogado.getAccess_token());
                         Toast.makeText(getApplicationContext(), "Bem-vindo!",
                                 Toast.LENGTH_SHORT).show();
+
+                        atualizaMenuLogado(userLogado);
 
                         EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
 

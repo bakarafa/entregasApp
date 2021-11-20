@@ -1,7 +1,11 @@
 package com.vianna.entregasapp.model.dto;
 
 public class UsuarioDTO {
-    String nome,cpf, idade, telefone, endereco,email,senha;
+
+    private int id;
+    private String nome,cpf, idade, telefone, endereco,email,senha;
+
+
 
     public UsuarioDTO() {
     }
@@ -14,6 +18,30 @@ public class UsuarioDTO {
         this.endereco = endereco;
         this.email = email;
         this.senha = senha;
+    }
+
+    public UsuarioDTO(String nome, String cpf, String idade, String telefone, String endereco, String email, String senha, int id) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.idade = idade;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.email = email;
+        this.senha = senha;
+        this.id = id;
+    }
+
+    public UsuarioDTO(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

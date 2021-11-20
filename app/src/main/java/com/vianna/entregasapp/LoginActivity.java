@@ -63,12 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if ( user != null) {//se user nao for nulo (ou seja, conseguiu logar)
 
-                    //shared prefs ao logar
-                    SharedPreferences prefs = getSharedPreferences("filmesApp",MODE_PRIVATE);
-                    SharedPreferences.Editor prefsEditor = prefs.edit();
-                    prefsEditor.putString("token", user.getAccess_token());
-                    prefsEditor.commit();
-                    //
+
 
                     itt.putExtra("userLogado",user);
                     setResult(10, itt);//logou certinho

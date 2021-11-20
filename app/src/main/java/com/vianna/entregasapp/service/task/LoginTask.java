@@ -94,7 +94,7 @@ public class LoginTask extends AsyncTask<InputLoginDTO, Void, LoginDTO> {
             }
         }
 
-        Log.i("TAG", result.toString());
+//        Log.i("TAG", result.toString());
 
         //Transforma String GSON para objeto -- importar biblioteca GSON
 //        XXXXXXXX obj = new Gson().fromJson(resp.toString(),XXXX);
