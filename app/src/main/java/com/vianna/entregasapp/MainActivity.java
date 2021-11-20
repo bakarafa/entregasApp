@@ -32,7 +32,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vianna.entregasapp.databinding.ActivityMainBinding;
-import com.vianna.entregasapp.model.dto.UserDTO;
+import com.vianna.entregasapp.model.dto.LoginDTO;
 import com.vianna.entregasapp.ui.entregas.EntregasFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ImageView ivFotoNavBar;
     TextView cpNome, cpEmail;
-    UserDTO userLogado;
+    LoginDTO userLogado;
     //----------------------fim
 
 
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("LOGIN", "onActivityResult:  Login retorno - "+result.getResultCode());
 
                     if (result.getResultCode() == 10){
-                        userLogado = (UserDTO) result.getData().getExtras().getSerializable("userLogado");
+                        userLogado = (LoginDTO) result.getData().getExtras().getSerializable("userLogado");
 
                         atualizaMenuLogado(userLogado);
 
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("LOGIN", "onActivityResult:  Nova entrega retorno - "+result.getResultCode());
 
                     if (result.getResultCode() == 10){
-                        userLogado = (UserDTO) result.getData().getExtras().getSerializable("userLogado");
+                        userLogado = (LoginDTO) result.getData().getExtras().getSerializable("userLogado");
 
                         Toast.makeText(getApplicationContext(), "Entrega solicitada com sucesso!",
                                 Toast.LENGTH_SHORT).show();
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     //----------------------fim
 
     //----------------------inicio
-    private void atualizaMenuLogado(UserDTO userLogado) {
+    private void atualizaMenuLogado(LoginDTO userLogado) {
         if (userLogado.getROLE().equals("CLIENTE")) {
             ivFotoNavBar.setImageResource(R.drawable.client_consumer_customer_user_avatar_icon);
             navigationView.getMenu().findItem(R.id.nav_add_entrega_cliente).setVisible(true);

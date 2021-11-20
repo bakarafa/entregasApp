@@ -1,21 +1,12 @@
 package com.vianna.entregasapp.service;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.vianna.entregasapp.config.RetrofitConfig;
 import com.vianna.entregasapp.model.dto.InputLoginDTO;
-import com.vianna.entregasapp.model.dto.UserDTO;
+import com.vianna.entregasapp.model.dto.LoginDTO;
 import com.vianna.entregasapp.service.task.LoginTask;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
+public class LoginService {
 
-public class UserService {
-
-    public UserDTO logar(String login, String senha){//2
+    public LoginDTO logar(String login, String senha){//2
 
 
         InputLoginDTO log = new InputLoginDTO(login, senha);

@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.vianna.entregasapp.model.dto.UserDTO;
-import com.vianna.entregasapp.service.UserService;
+import com.vianna.entregasapp.model.dto.LoginDTO;
+import com.vianna.entregasapp.service.LoginService;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent itt = new Intent();
 
-                UserDTO user = new UserService().logar(login, senha);//usa o serviço pra tentar pegar um userDTO (logado)//1//esse serviço é como se fosse a DAO
+                LoginDTO user = new LoginService().logar(login, senha);//usa o serviço pra tentar pegar um userDTO (logado)//1//esse serviço é como se fosse a DAO
 
                 if ( user != null) {//se user nao for nulo (ou seja, conseguiu logar)
 

@@ -2,7 +2,7 @@ package com.vianna.entregasapp.model.dto;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable {
+public class LoginDTO implements Serializable {
 
     private String access_token, refresh_token, nome, email, ROLE;
 
@@ -10,10 +10,10 @@ public class UserDTO implements Serializable {
         return "Bearer "+access_token;
     }
 
-    public UserDTO() {
+    public LoginDTO() {
     }
 
-    public UserDTO(String access_token, String refresh_token, String nome, String email, String ROLE) {
+    public LoginDTO(String access_token, String refresh_token, String nome, String email, String ROLE) {
         this.access_token = access_token;
         this.refresh_token = refresh_token;
         this.nome = nome;

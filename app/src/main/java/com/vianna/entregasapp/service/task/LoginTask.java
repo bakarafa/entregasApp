@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.vianna.entregasapp.model.dto.InputLoginDTO;
-import com.vianna.entregasapp.model.dto.UserDTO;
+import com.vianna.entregasapp.model.dto.LoginDTO;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class LoginTask extends AsyncTask<InputLoginDTO, Void, UserDTO> {
+public class LoginTask extends AsyncTask<InputLoginDTO, Void, LoginDTO> {
 
     /*@Override
     protected UserDTO doInBackground(InputLoginDTO... inputLoginDTOS) {
@@ -26,7 +26,7 @@ public class LoginTask extends AsyncTask<InputLoginDTO, Void, UserDTO> {
     }*/
 
     @Override
-    protected UserDTO doInBackground(InputLoginDTO... dados) {
+    protected LoginDTO doInBackground(InputLoginDTO... dados) {
 //        Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
         //String data = "";
@@ -98,7 +98,7 @@ public class LoginTask extends AsyncTask<InputLoginDTO, Void, UserDTO> {
 
         //Transforma String GSON para objeto -- importar biblioteca GSON
 //        XXXXXXXX obj = new Gson().fromJson(resp.toString(),XXXX);
-        UserDTO obj = new Gson().fromJson(result.toString(),UserDTO.class);
+        LoginDTO obj = new Gson().fromJson(result.toString(), LoginDTO.class);
 
         return obj;
     }
