@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable {
 
-    private String access_token, refresh_token, nome, email;
+    private String access_token, refresh_token, nome, email, ROLE;
 
     public  String getToken(){
         return "Bearer "+access_token;
@@ -13,11 +13,12 @@ public class UserDTO implements Serializable {
     public UserDTO() {
     }
 
-    public UserDTO(String acess_token, String refresh_token, String nome, String email) {
-        this.access_token = acess_token;
+    public UserDTO(String access_token, String refresh_token, String nome, String email, String ROLE) {
+        this.access_token = access_token;
         this.refresh_token = refresh_token;
         this.nome = nome;
         this.email = email;
+        this.ROLE = ROLE;
     }
 
     public String getAccess_token() {
@@ -50,5 +51,13 @@ public class UserDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getROLE() {
+        return ROLE;
+    }
+
+    public void setROLE(String ROLE) {
+        this.ROLE = ROLE;
     }
 }

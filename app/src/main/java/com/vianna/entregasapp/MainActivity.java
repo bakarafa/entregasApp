@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     //----------------------inicio
     NavigationView navigationView;
+    ImageView ivFotoNavBar;
     TextView cpNome, cpEmail;
     UserDTO userLogado;
     //----------------------fim
@@ -127,12 +129,12 @@ public class MainActivity extends AppCompatActivity {
 //                    changeFragment(gal);//chama o metodo qu faz a troca do fragment
 //
 ////                    testeRetrofit();
-                } else if (item.getItemId() == R.id.nav_add_entrega){//nova entrega
+                } else if (item.getItemId() == R.id.nav_add_entrega_cliente){//nova entrega
                     Intent itt = new Intent(getApplicationContext(), CadNovaEntregaActivity.class);
 
                     viewCadEntregaActivity.launch(itt);
 
-                } else if (item.getItemId() == R.id.nav_entregas){//tela d elista de entregas
+                } else if (item.getItemId() == R.id.nav_entregas_atuais_all){//tela d elista de entregas
                     EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
 
                     changeFragment(ent);//chama o metodo qu faz a troca do fragment
@@ -226,21 +228,38 @@ public class MainActivity extends AppCompatActivity {
 
     //----------------------inicio
     private void atualizaMenuLogado(UserDTO userLogado) {
-        navigationView.getMenu().findItem(R.id.nav_entrar_all).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_entregas).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_add_entrega).setVisible(true);
+        if (userLogado.getROLE().equals("CLIENTE")) {
+            ivFotoNavBar.setImageResource(R.drawable.client_consumer_customer_user_avatar_icon);
+            navigationView.getMenu().findItem(R.id.nav_add_entrega_cliente).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Minhas Entregas");
+                    } else if (userLogado.getROLE().equals("MOTOBOY")) {
+            ivFotoNavBar.setImageResource(R.drawable.motoboy);
+            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas em Andamento");
+            navigationView.getMenu().findItem(R.id.nav_entregas_disponiveis_moto).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_entregas_historico_moto).setVisible(true);
+        } else {
+            ivFotoNavBar.setImageResource(R.drawable.administrator_user_icon);
+            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas");
+        }
 
+        navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setVisible(true);//entregas aparece pra todos mas o nome muda de acordo com o ROLE
+        navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_entrar_all).setVisible(false);
         cpNome.setText(userLogado.getNome());
         cpEmail.setText(userLogado.getEmail());
     }
 
     private void atualizaMenuDeslogado() {
-        navigationView.getMenu().findItem(R.id.nav_entrar_all).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_entregas).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_add_entrega).setVisible(false);
 
+        navigationView.getMenu().findItem(R.id.nav_entrar_all).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_add_entrega_cliente).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_entregas_disponiveis_moto).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_entregas_historico_moto).setVisible(false);
+
+
+        ivFotoNavBar.setImageResource(R.mipmap.ic_launcher_round);
         cpNome.setText(getResources().getString(R.string.nav_header_title));//coloca o texto que está no strings.xml
         cpEmail.setText(getResources().getString(R.string.nav_header_subtitle));//coloca o texto que está no strings.xml
 
@@ -254,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
     private void vinculo() {
         cpNome =  navigationView.getHeaderView(0).findViewById(R.id.nhNome);
         cpEmail =  navigationView.getHeaderView(0).findViewById(R.id.nhEmail);
+        ivFotoNavBar = navigationView.getHeaderView(0).findViewById(R.id.iv_foto);
     }
     //----------------------fim
 

@@ -17,4 +17,6 @@
     <string name="txtUsuario">Usuario</string>
     <string name="txtSenha">Senha</string>
     <string name="txtAddEntrega">Nova Entrega</string>
+    <string name="txtEntregasDisponiveis">Entregas Disponiveis</string>
+    <string name="txtEntregasHistorico">Entregas Historico</string>
 </resources>

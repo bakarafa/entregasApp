@@ -10,14 +10,24 @@
             android:icon="@android:drawable/ic_lock_idle_lock"
             android:title="@string/txtEntrar" />
         <item
-            android:id="@+id/nav_add_entrega"
+            android:id="@+id/nav_add_entrega_cliente"
             android:icon="@android:drawable/stat_notify_more"
             android:title="@string/txtAddEntrega"
             android:visible="false" />
         <item
-            android:id="@+id/nav_entregas"
+            android:id="@+id/nav_entregas_atuais_all"
             android:icon="@android:drawable/ic_dialog_dialer"
             android:title="@string/txtentregas"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_entregas_disponiveis_moto"
+            android:icon="@android:drawable/ic_dialog_map"
+            android:title="@string/txtEntregasDisponiveis"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_entregas_historico_moto"
+            android:icon="?attr/actionModePasteDrawable"
+            android:title="@string/txtEntregasHistorico"
             android:visible="false" />
         <item
             android:id="@+id/nav_sair_all"

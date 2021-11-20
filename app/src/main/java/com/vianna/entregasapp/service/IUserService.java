@@ -11,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -18,6 +19,7 @@ public interface IUserService {
 
     @FormUrlEncoded
     @POST("oauth/token")
+    @Headers({"Content-Type: application/x-www-form-urlencoded"})
     public Call<UserDTO> getUser(
             @Header("Authorization")String token,
             @Field("grant_type")String grant_type,
