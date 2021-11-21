@@ -14,6 +14,10 @@ public class EntregaDTO implements Serializable {
     public EntregaDTO() {
     }
 
+    public EntregaDTO(double preco) {
+        this.preco = preco;
+    }
+
     public EntregaDTO(String produto, String bairroOrigem, String bairroDestino, String obs, double preco) {
         this.produto = produto;
         this.bairroOrigem = bairroOrigem;
