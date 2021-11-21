@@ -34,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.vianna.entregasapp.databinding.ActivityMainBinding;
 import com.vianna.entregasapp.model.dto.LoginDTO;
+import com.vianna.entregasapp.ui.entregas.EntregaAddFragment;
 import com.vianna.entregasapp.ui.entregas.EntregasFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -136,9 +137,12 @@ public class MainActivity extends AppCompatActivity {
 //
 ////                    testeRetrofit();
                 } else if (item.getItemId() == R.id.nav_add_entrega_cliente){//nova entrega
-                    Intent itt = new Intent(getApplicationContext(), CadNovaEntregaActivity.class);
+//                    Intent itt = new Intent(getApplicationContext(), CadNovaEntregaActivity.class);
+//
+//                    viewCadEntregaActivity.launch(itt);
 
-                    viewCadEntregaActivity.launch(itt);
+                    EntregaAddFragment ent = new EntregaAddFragment();//cadastro de entrega
+                    changeFragment(ent);
 
                 } else if (item.getItemId() == R.id.nav_entregas_atuais_all){//tela d elista de entregas
                     EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
@@ -152,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences prefs = getSharedPreferences("entregasApp",MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = prefs.edit();
                     prefsEditor.remove("accessToken");
+                    prefsEditor.remove("ROLE");
                     prefsEditor.commit();
                     //
 
@@ -188,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences prefs = getSharedPreferences("entregasApp",MODE_PRIVATE);
                         SharedPreferences.Editor prefsEditor = prefs.edit();
                         prefsEditor.putString("accessToken", userLogado.getAccess_token());
+                        prefsEditor.putString("ROLE", userLogado.getROLE());
                         prefsEditor.commit();
                         //
                         Log.i("TOKEN", "ACESS TOKEN DO USUARIO LOGADO "+userLogado.getAccess_token());
@@ -196,13 +202,13 @@ public class MainActivity extends AppCompatActivity {
 
                         atualizaMenuLogado(userLogado);
 
-                        EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
-
-                        Bundle args = new Bundle();//cria um bundle para armazenar argumentos
-                        args.putString("nome", "Zezin da Silva");//cria um novo argumento chamado nome
-                        ent.setArguments(args);//coloca os argumentos no fragmento
-
-                        changeFragment(ent);//chama o metodo qu faz a troca do fragment
+//                        EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
+//
+//                        Bundle args = new Bundle();//cria um bundle para armazenar argumentos
+//                        args.putString("nome", "Zezin da Silva");//cria um novo argumento chamado nome
+//                        ent.setArguments(args);//coloca os argumentos no fragmento
+//
+//                        changeFragment(ent);//chama o metodo qu faz a troca do fragment
                     } else if (result.getResultCode() == 15){
                         userLogado = null;
                         Toast.makeText(getApplicationContext(), "Login ou Senha incorreta",

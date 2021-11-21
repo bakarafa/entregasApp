@@ -19,7 +19,6 @@
     <string name="txtAddEntrega">Nova Entrega</string>
     <string name="txtEntregasDisponiveis">Entregas Disponiveis</string>
     <string name="txtEntregasHistorico">Entregas Historico</string>
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtNome">Nome</string>
     <string name="txtCPF">CPF</string>
@@ -27,11 +26,12 @@
     <string name="txtTelefone">Telefone</string>
     <string name="txtEndereco">Endereço</string>
     <string name="txtEmail">Email</string>
-    <string name="txtSenha">Senha</string>
     <string name="txtProduto">Produto</string>
     <string name="txtBairroOrigem">Origem</string>
     <string name="txtDestino">Destino</string>
     <string name="txtObs">Observação</string>
     <string name="txtFazerPedido">Fazer Pedido</string>
     <string name="txtCadastroDePedidos">Cadastro de Pedidos</string>
+    <string name="txtCadastroEntregas">Cadastro de Entrega</string>
+    <string name="txtSolicitarEntrega">Solicitar Entrega</string>
 </resources>

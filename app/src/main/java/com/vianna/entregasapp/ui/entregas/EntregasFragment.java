@@ -1,13 +1,10 @@
 package com.vianna.entregasapp.ui.entregas;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.vianna.entregasapp.R;
 import com.vianna.entregasapp.adapter.entregas.EntregaAdapter;
@@ -24,14 +20,13 @@ import com.vianna.entregasapp.model.dto.EntregaDTO;
 import com.vianna.entregasapp.service.EntregaService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EntregasFragment extends Fragment {
 
     //-----
     RecyclerView rvListagemEntregas;
     ArrayList<EntregaDTO> entregas;
-    String accessToken;
+    String accessToken, ROLE;
     //-----
 
 
@@ -45,6 +40,7 @@ public class EntregasFragment extends Fragment {
         //-----acesso ao token
         SharedPreferences prefs = this.getActivity().getSharedPreferences("entregasApp", Context.MODE_PRIVATE);
         accessToken = prefs.getString("accessToken","");
+        ROLE = prefs.getString("ROLE","");
         //-----
 
 
@@ -60,10 +56,18 @@ public class EntregasFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        if (ROLE.equals("CLIENTE")){
+            entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasClienteLogado(accessToken);
+        } else if (ROLE.equals("MOTOBOY")){
+            entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasMotoboyLogado(accessToken);
+        } else {//ADM
+            entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasTodosMotoboys(accessToken);
+        }
 
-        entregas = (ArrayList<EntregaDTO>) new EntregaService().listaTodasEntregas(accessToken);
-        Log.i("ENTREGAS", "Tamanho: "+entregas.size());
         setaAdapter();
+
+        Log.i("ENTREGAS", "RETORNO BASEADO NO ROLE: "+entregas.size());
+
 
         //        mensagem = getActivity().findViewById(R.id.text_home);//binding
 

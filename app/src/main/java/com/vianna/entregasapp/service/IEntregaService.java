@@ -36,7 +36,7 @@ public interface IEntregaService {
 
     @GET("entrega/motoboy/my")//motoboy
     @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    public Call<List<EntregaDTO>> getALLEntregasMotoboy(@Header("Authorization")String token);//todas entregas do motoboy logado (todos status)
+    public Call<List<EntregaDTO>> getAllEntregasMotoboy(@Header("Authorization")String token);//todas entregas do motoboy logado (todos status)
 
     @GET("entrega/{bairroA}}/{bairroB}}/preco")//motoboy
     @Headers({"Content-Type: application/x-www-form-urlencoded"})

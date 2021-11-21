@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     TextInputLayout tilLogin, tilSenha;
-    Button btnLogar;
+    Button btnLogar, btnClient, btnAdm, btnMoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,43 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void registraEventos() {
+
         btnLogar.setOnClickListener(clickLogar());
+
+        btnMoto.setOnClickListener(preencheMoto());//apagar
+        btnAdm.setOnClickListener(preencheAdm());//apagar
+        btnClient.setOnClickListener(preencheClient());//apagar
+    }
+
+    private View.OnClickListener preencheClient() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tilLogin.getEditText().setText("ze@ze");//apagar
+                tilSenha.getEditText().setText("123");//apagar
+            }
+        };
+
+    }
+
+    private View.OnClickListener preencheAdm() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tilLogin.getEditText().setText("admin@coelho.com.br");//apagar
+                tilSenha.getEditText().setText("admin");//apagar
+            }
+        };
+    }
+
+    private View.OnClickListener preencheMoto() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tilLogin.getEditText().setText("a@a");//apagar
+                tilSenha.getEditText().setText("123");//apagar
+            }
+        };
     }
 
 
@@ -80,6 +116,10 @@ public class LoginActivity extends AppCompatActivity {
         tilLogin = findViewById(R.id.tilLogin);
         tilSenha = findViewById(R.id.tilSenha);
         btnLogar = findViewById(R.id.btnLogar);
+
+        btnAdm = findViewById(R.id.btnAdm);//apagar
+        btnClient = findViewById(R.id.btnClient);//apagar
+        btnMoto = findViewById(R.id.btnMoto);//apagar
 
     }
 }
