@@ -5,7 +5,7 @@ public class UsuarioDTO {
     private int id;
     private String nome,cpf, idade, telefone, endereco,email,senha;
 
-
+//acho que cpf é int
 
     public UsuarioDTO() {
     }
