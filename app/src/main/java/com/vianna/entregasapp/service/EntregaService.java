@@ -36,11 +36,11 @@ public class EntregaService {
 
 
     //CLIENTE E MOTOBOY
-    public EntregaDTO calculaEntrega(String accessToken, String origem, String destino) {//cliente e motoboy
+    public Double getPrecoDaEntrega(String accessToken, String origem, String destino) {//cliente e motoboy
         Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
         IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
 
-        Call<EntregaDTO> chamada = service.getPreco("Bearer "+accessToken, origem, destino);//prepara para fazer a busca de todos of filmes
+        Call<Double> chamada = service.getPreco("Bearer "+accessToken, origem, destino);//prepara para fazer a busca de todos of filmes
 
         try {
             Log.i("TODAS ENTREGAS", "Caiu no try.");
@@ -192,7 +192,25 @@ public class EntregaService {
         IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
 
         Call<EntregaDTO> chamada = service.salvaNovaEntrega("Bearer "+accessToken, entregaDTO);//prepara para fazer a busca de todos of filmes
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            chamada.execute().body();
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+        }
     }
+
+//    public void createEntrega(String accessToken, EntregaDTO entregaDTO) {//cliente
+//        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+//        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+//
+//        Call<EntregaDTO> chamada = service.salvaNovaEntrega("Bearer "+accessToken,
+//                entregaDTO.getProduto(),
+//                entregaDTO.getBairroOrigem(),
+//                entregaDTO.getBairroDestino(),
+//                entregaDTO.getObs());//prepara para fazer a busca de todos of filmes
+//    }
 
 
 

@@ -1,15 +1,12 @@
 package com.vianna.entregasapp.ui.entregas;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.vianna.entregasapp.MainActivity;
 import com.vianna.entregasapp.R;
 import com.vianna.entregasapp.model.dto.EntregaDTO;
 import com.vianna.entregasapp.service.EntregaService;
@@ -35,10 +31,11 @@ public class EntregaAddFragment extends Fragment {
     Spinner spiOrigem, spiDestino;
     Button btnSolicitar;
 
+    double preco;
     List<String>lista = new ArrayList<>();
     String origem, destino;
     String accessToken;
-    EntregaDTO entregaDTO;
+
 
 
 
@@ -73,12 +70,12 @@ public class EntregaAddFragment extends Fragment {
                 //calcula o valor e pergunta se quer confirmar
                 origem = spiOrigem.getSelectedItem().toString();
                 destino = spiDestino.getSelectedItem().toString();
-                entregaDTO = new EntregaService().calculaEntrega(accessToken, origem, destino);
+                preco = new EntregaService().getPrecoDaEntrega(accessToken, origem, destino);
 
                 //alerta
                 final AlertDialog dialog = new AlertDialog.Builder(getContext())
                         .setTitle("Solicitando entrega")
-                        .setMessage("Valor: R$ "+entregaDTO.getPreco())
+                        .setMessage("Valor: R$ "+ preco)
                         .setPositiveButton("Aceitar", null)
                         .setNegativeButton("Recusar", null)
                         .show();
@@ -107,13 +104,13 @@ public class EntregaAddFragment extends Fragment {
     }
 
     private void salvaEntrega() {//após clicar em ok
-        entregaDTO.setProduto(tilProduto.getEditText().getText().toString());
-        entregaDTO.setObs(tilObs.getEditText().getText().toString());
-        entregaDTO.setBairroOrigem(origem);
-        entregaDTO.setBairroDestino(destino);
+        EntregaDTO entregaDTO = new EntregaDTO(tilProduto.getEditText().getText().toString(),
+                origem,
+                destino,
+                tilObs.getEditText().getText().toString(),
+                preco);
 
         new EntregaService().createEntrega(accessToken, entregaDTO);
-
     }
 
     @Override
