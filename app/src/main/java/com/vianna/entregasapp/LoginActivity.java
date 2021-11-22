@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.google.android.material.textfield.TextInputLayout;
 import com.vianna.entregasapp.model.dto.LoginDTO;
 import com.vianna.entregasapp.service.LoginService;
+import com.vianna.entregasapp.util.Validations;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -90,6 +91,12 @@ public class LoginActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(!Validations.validaCampoVazio(tilLogin) ||
+                        !Validations.validaCampoVazio(tilSenha)){
+                    return;
+                }
+
                 String login = tilLogin.getEditText().getText().toString();
                 String senha = tilSenha.getEditText().getText().toString();
 

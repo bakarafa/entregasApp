@@ -34,6 +34,72 @@ public class EntregaService {
         }
     }
 
+    public List<EntregaDTO> getTodasEntregasAguardandoAdm(String accessToken) {//adm
+        Retrofit r = new RetrofitConfig().getRetrofit();
+        IEntregaService service = r.create(IEntregaService.class);
+
+        Call<List<EntregaDTO>> chamada = service.getAllEntregas("Bearer "+accessToken);
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            retornaAguardando(chamada.execute().body());
+            return listaRetorno;
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
+    public List<EntregaDTO> getTodasEntregasTransitoAdm(String accessToken) {//adm
+        Retrofit r = new RetrofitConfig().getRetrofit();
+        IEntregaService service = r.create(IEntregaService.class);
+
+        Call<List<EntregaDTO>> chamada = service.getAllEntregas("Bearer "+accessToken);
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            retornaTransito(chamada.execute().body());
+            return listaRetorno;
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
+    public List<EntregaDTO> getTodasEntregasAguardandoETransitoAdm(String accessToken) {//adm
+        Retrofit r = new RetrofitConfig().getRetrofit();
+        IEntregaService service = r.create(IEntregaService.class);
+
+        Call<List<EntregaDTO>> chamada = service.getAllEntregas("Bearer "+accessToken);
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            retornaAguardandoETransito(chamada.execute().body());
+            return listaRetorno;
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
+    public List<EntregaDTO> getTodasEntregasFinalziadasAdm(String accessToken) {//adm
+        Retrofit r = new RetrofitConfig().getRetrofit();
+        IEntregaService service = r.create(IEntregaService.class);
+
+        Call<List<EntregaDTO>> chamada = service.getAllEntregas("Bearer "+accessToken);
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            retornaEntregue(chamada.execute().body());
+            return listaRetorno;
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
+
+
 
     //CLIENTE E MOTOBOY
     public Double getPrecoDaEntrega(String accessToken, String origem, String destino) {//cliente e motoboy
@@ -71,7 +137,7 @@ public class EntregaService {
         Retrofit r = new RetrofitConfig().getRetrofit();
         IEntregaService service = r.create(IEntregaService.class);
 
-        Call<List<EntregaDTO>> chamada = service.getAllEntregasUsuario("Bearer "+accessToken);
+        Call<List<EntregaDTO>> chamada = service.getAllEntregasMotoboy("Bearer "+accessToken);
 
         try {
             Log.i("TODAS ENTREGAS", "Caiu no try.");
@@ -87,7 +153,7 @@ public class EntregaService {
         Retrofit r = new RetrofitConfig().getRetrofit();
         IEntregaService service = r.create(IEntregaService.class);
 
-        Call<List<EntregaDTO>> chamada = service.getAllEntregasUsuario("Bearer "+accessToken);
+        Call<List<EntregaDTO>> chamada = service.getAllEntregasMotoboy("Bearer "+accessToken);
 
         try {
             Log.i("TODAS ENTREGAS", "Caiu no try.");
@@ -99,21 +165,52 @@ public class EntregaService {
         }
     }
 
-    public List<EntregaDTO> getEntregasAguardandoMotoboyLogado(String accessToken) {//cliente
-        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
-        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+    public List<EntregaDTO> getEntregasAguardando(String accessToken) {//motooby
+        Retrofit r = new RetrofitConfig().getRetrofit();
+        IEntregaService service = r.create(IEntregaService.class);
 
-        Call<List<EntregaDTO>> chamada = service.getAllEntregasUsuario("Bearer "+accessToken);//prepara para fazer a busca de todos of filmes
+        Call<List<EntregaDTO>> chamada = service.getEntregasAguardando("Bearer "+accessToken);
 
         try {
             Log.i("TODAS ENTREGAS", "Caiu no try.");
-            retornaAguardando(chamada.execute().body());
-            return listaRetorno;
+            return chamada.execute().body();
         } catch (IOException e) {
             Log.i("TODAS ENTREGAS", "Caiu no catch.");
             return null;
         }
     }
+
+//    public List<EntregaDTO> getEntregasAguardandoMotoboyLogado(String accessToken) {//cliente
+//        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+//        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+//
+//        Call<List<EntregaDTO>> chamada = service.getAllEntregasMotoboy("Bearer "+accessToken);//prepara para fazer a busca de todos of filmes
+//
+//        try {
+//            Log.i("TODAS ENTREGAS", "Caiu no try.");
+//            retornaAguardando(chamada.execute().body());
+//            return listaRetorno;
+//        } catch (IOException e) {
+//            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+//            return null;
+//        }
+//    }
+
+//    public List<EntregaDTO> getEntregasAguardandoETransitoMotoboyLogado(String accessToken) {//cliente
+//        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+//        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+//
+//        Call<List<EntregaDTO>> chamada = service.getAllEntregasMotoboy("Bearer "+accessToken);//prepara para fazer a busca de todos of filmes
+//
+//        try {
+//            Log.i("TODAS ENTREGAS", "Caiu no try.");
+//            retornaAguardandoETransito(chamada.execute().body());
+//            return listaRetorno;
+//        } catch (IOException e) {
+//            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+//            return null;
+//        }
+//    }
 
 
 
@@ -185,6 +282,22 @@ public class EntregaService {
         }
     }
 
+    public List<EntregaDTO> getEntregasAguardandoETransitoClienteLogado(String accessToken) {//cliente
+        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+
+        Call<List<EntregaDTO>> chamada = service.getAllEntregasUsuario("Bearer "+accessToken);//prepara para fazer a busca de todos of filmes
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            retornaAguardandoETransito(chamada.execute().body());
+            return listaRetorno;
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
 
 
     public void createEntrega(String accessToken, EntregaDTO entregaDTO) {//cliente
@@ -230,7 +343,15 @@ public class EntregaService {
 
     public void retornaTransito(List<EntregaDTO> lista) {
         for (EntregaDTO ent:lista) {
-            if (ent.getStatus().equals("ENTREGUE")){
+            if (ent.getStatus().equals("TRANSITO")){
+                listaRetorno.add(ent);
+            }
+        }
+    }
+
+    public void retornaAguardandoETransito(List<EntregaDTO> lista) {
+        for (EntregaDTO ent:lista) {
+            if (ent.getStatus().equals("AGUARDANDO") || ent.getStatus().equals("TRANSITO")){
                 listaRetorno.add(ent);
             }
         }

@@ -34,4 +34,5 @@
     <string name="txtCadastroDePedidos">Cadastro de Pedidos</string>
     <string name="txtCadastroEntregas">Cadastro de Entrega</string>
     <string name="txtSolicitarEntrega">Solicitar Entrega</string>
+    <string name="txtentregasAll">nome_dinamico_entregas_all</string>
 </resources>

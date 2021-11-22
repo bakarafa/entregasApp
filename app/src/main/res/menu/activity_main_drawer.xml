@@ -17,15 +17,15 @@
         <item
             android:id="@+id/nav_entregas_atuais_all"
             android:icon="@android:drawable/ic_dialog_dialer"
-            android:title="@string/txtentregas"
+            android:title="@string/txtentregasAll"
             android:visible="false" />
         <item
-            android:id="@+id/nav_entregas_disponiveis_moto"
+            android:id="@+id/nav_entregas_aguardando_moto"
             android:icon="@android:drawable/ic_dialog_map"
             android:title="@string/txtEntregasDisponiveis"
             android:visible="false" />
         <item
-            android:id="@+id/nav_entregas_historico_moto"
+            android:id="@+id/nav_entregas_finalizadas_all"
             android:icon="?attr/actionModePasteDrawable"
             android:title="@string/txtEntregasHistorico"
             android:visible="false" />

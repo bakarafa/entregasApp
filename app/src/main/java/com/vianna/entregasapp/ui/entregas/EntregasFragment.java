@@ -26,7 +26,7 @@ public class EntregasFragment extends Fragment {
     //-----
     RecyclerView rvListagemEntregas;
     ArrayList<EntregaDTO> entregas;
-    String accessToken, ROLE;
+    String accessToken, ROLE, navClicado;
     //-----
 
 
@@ -56,22 +56,46 @@ public class EntregasFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (ROLE.equals("CLIENTE")){
-            entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasClienteLogado(accessToken);
-        } else if (ROLE.equals("MOTOBOY")){
-            entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasMotoboyLogado(accessToken);
-        } else {//ADM
-            entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasTodosMotoboys(accessToken);
-        }
+
+        navClicado = getArguments().getString("navClicado");//botao que o cara clicou la fora
+
+        buscaListaParaCarregar();//busca a lista de acordo com o ROLE e o botão clicado
 
         setaAdapter();
 
         Log.i("ENTREGAS", "RETORNO BASEADO NO ROLE: "+entregas.size());
 
+    }
 
-        //        mensagem = getActivity().findViewById(R.id.text_home);//binding
+    private void buscaListaParaCarregar() {
+        if (ROLE.equals("CLIENTE")){
+            if (navClicado.equals("entregasAtuais")){
+                entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasAguardandoETransitoClienteLogado(accessToken);
+            } else if (navClicado.equals("historico")){
+                entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasFinalizadasClienteLogado(accessToken);
+            } else {
+//                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasClienteLogado(accessToken);//tudo
+            }
+        } else if (ROLE.equals("MOTOBOY")){
+            if (navClicado.equals("entregasAtuais")){
+                entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasEmTransitoMotoboyLogado(accessToken);
+            } else if (navClicado.equals("historico")){
+                entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasFinalizadasMotoboyLogado(accessToken);
+            } else if (navClicado.equals("aguardando")){
+                entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasAguardando(accessToken);
+            } else {
+//                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasMotoboyLogado(accessToken);
+            }
 
-//        mensagem.setText(getArguments().getString("nome"));//pega o "nome" que foi passado via arguments da MainActivity e coloca no campo de id text_home
+        } else {//ADM
+            if (navClicado.equals("entregasAtuais")){
+                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasAguardandoETransitoAdm(accessToken);
+            } else if (navClicado.equals("historico")){
+                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasFinalziadasAdm(accessToken);
+            } else {
+//                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasTodosMotoboys(accessToken);
+            }
+        }
     }
 
 

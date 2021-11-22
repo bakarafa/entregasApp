@@ -95,61 +95,59 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         //----------------------fim
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-//                .setOpenableLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
-    //----------------------inicio
+    //----------------------inicio---NAV BOTOES
     private NavigationView.OnNavigationItemSelectedListener clickNavigator() {
         return new NavigationView.OnNavigationItemSelectedListener() {//listener dos botoes do menu
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                if(item.getItemId() == R.id.nav_entrar_all){//se o botao nav_login for clicado...
+                if(item.getItemId() == R.id.nav_entrar_all){//FAZER LOGIN
                     Intent itt = new Intent(getApplicationContext(), LoginActivity.class);
 
                     viewLoginActivity.launch(itt);
-//                } else if (item.getItemId() == R.id.nav_home){
-//                    HomeFragment home = new HomeFragment();//cria o fragmento que vai ser chamado
 //
-//                    Bundle args = new Bundle();//cria um bundle para armazenar argumentos
-//                    args.putString("nome", "Zezin da Silva");//cria um novo argumento chamado nome
-//                    home.setArguments(args);//coloca os argumentos no fragmento
-//
-//                    changeFragment(home);//chama o metodo qu faz a troca do fragment
-//
-//                } else if (item.getItemId() == R.id.nav_filmes){
-//
-//                    GalleryFragment gal = new GalleryFragment();//cria o fragmento que vai ser chamado
-//
-//                    Bundle args = new Bundle();//cria um bundle para armazenar argumentos
-//                    args.putString("token", userLogado.getToken());//cria um novo argumento chamado nome
-//                    gal.setArguments(args);//coloca os argumentos no fragmento
-//
-//                    changeFragment(gal);//chama o metodo qu faz a troca do fragment
-//
-////                    testeRetrofit();
-                } else if (item.getItemId() == R.id.nav_add_entrega_cliente){//nova entrega
-//                    Intent itt = new Intent(getApplicationContext(), CadNovaEntregaActivity.class);
-//
-//                    viewCadEntregaActivity.launch(itt);
+                } else if (item.getItemId() == R.id.nav_add_entrega_cliente){//NOVA ENTREGA
 
-                    EntregaAddFragment ent = new EntregaAddFragment();//cadastro de entrega
+                    EntregaAddFragment ent = new EntregaAddFragment();
                     changeFragment(ent);
 
-                } else if (item.getItemId() == R.id.nav_entregas_atuais_all){//tela d elista de entregas
-                    EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
+                } else if (item.getItemId() == R.id.nav_entregas_atuais_all){//ENTREGAS ATUAIS (em andamento para os clientes e disoniveis para os motoboys)
+                    EntregasFragment ent = new EntregasFragment();
 
-                    changeFragment(ent);//chama o metodo qu faz a troca do fragment
+                    //--------
+                    Bundle args = new Bundle();
+                    args.putString("navClicado", "entregasAtuais");
+                    ent.setArguments(args);
+                    //--------
 
-                } else if (item.getItemId() == R.id.nav_sair_all){
+                    changeFragment(ent);
+
+                } else if (item.getItemId() == R.id.nav_entregas_finalizadas_all){//ENTREGAS HISTORICO
+                    EntregasFragment ent = new EntregasFragment();
+
+                    //--------
+                    Bundle args = new Bundle();
+                    args.putString("navClicado", "historico");
+                    ent.setArguments(args);
+                    //--------
+
+                    changeFragment(ent);
+
+                } else if (item.getItemId() == R.id.nav_entregas_aguardando_moto){//ENTREGAS NOVAS AGUARDANDO
+                    EntregasFragment ent = new EntregasFragment();
+
+                    //--------
+                    Bundle args = new Bundle();
+                    args.putString("navClicado", "aguardando");
+                    ent.setArguments(args);
+                    //--------
+
+                    changeFragment(ent);
+
+                } else if (item.getItemId() == R.id.nav_sair_all){//FAZER LOGOUT
                     atualizaMenuDeslogado();
 
                     //shared prefs ao sair
@@ -202,13 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
                         atualizaMenuLogado(userLogado);
 
-//                        EntregasFragment ent = new EntregasFragment();//cria o fragmento que vai ser chamado
-//
-//                        Bundle args = new Bundle();//cria um bundle para armazenar argumentos
-//                        args.putString("nome", "Zezin da Silva");//cria um novo argumento chamado nome
-//                        ent.setArguments(args);//coloca os argumentos no fragmento
-//
-//                        changeFragment(ent);//chama o metodo qu faz a troca do fragment
+
                     } else if (result.getResultCode() == 15){
                         userLogado = null;
                         Toast.makeText(getApplicationContext(), "Login ou Senha incorreta",
@@ -255,16 +247,18 @@ public class MainActivity extends AppCompatActivity {
                     } else if (userLogado.getROLE().equals("MOTOBOY")) {
             ivFotoNavBar.setImageResource(R.drawable.motoboy);
             navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas em Andamento");
-            navigationView.getMenu().findItem(R.id.nav_entregas_disponiveis_moto).setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_entregas_historico_moto).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_entregas_aguardando_moto).setVisible(true);
         } else {
             ivFotoNavBar.setImageResource(R.drawable.administrator_user_icon);
-            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas");
+            navigationView.getMenu().findItem(R.id.nav_entregas_finalizadas_all).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas Atuais");
         }
 
         navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setVisible(true);//entregas aparece pra todos mas o nome muda de acordo com o ROLE
         navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_entregas_finalizadas_all).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_entrar_all).setVisible(false);
+
         cpNome.setText(userLogado.getNome());
         cpEmail.setText(userLogado.getEmail());
     }
@@ -275,8 +269,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_sair_all).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_add_entrega_cliente).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_entregas_disponiveis_moto).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_entregas_historico_moto).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_entregas_aguardando_moto).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_entregas_finalizadas_all).setVisible(false);
 
 
         ivFotoNavBar.setImageResource(R.mipmap.ic_launcher_round);

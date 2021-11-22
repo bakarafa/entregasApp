@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.vianna.entregasapp.R;
 import com.vianna.entregasapp.model.dto.EntregaDTO;
 import com.vianna.entregasapp.service.EntregaService;
+import com.vianna.entregasapp.util.Validations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +38,12 @@ public class EntregaAddFragment extends Fragment {
     String origem, destino;
     String accessToken;
 
-
-
-
     View rootView;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.entrega_add_fragment, container, false);//define qual fragment será carregada ao abrir
+        rootView = inflater.inflate(R.layout.fragment_entrega_add, container, false);//define qual fragment será carregada ao abrir
 
         //-----acesso ao token
         SharedPreferences prefs = this.getActivity().getSharedPreferences("entregasApp", Context.MODE_PRIVATE);
@@ -67,6 +66,10 @@ public class EntregaAddFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                if(!Validations.validaCampoVazio(tilProduto) ||
+                        !Validations.validaCampoVazio(tilObs)){
+                    return;
+                }
                 //calcula o valor e pergunta se quer confirmar
                 origem = spiOrigem.getSelectedItem().toString();
                 destino = spiDestino.getSelectedItem().toString();
@@ -74,10 +77,14 @@ public class EntregaAddFragment extends Fragment {
 
                 //alerta
                 final AlertDialog dialog = new AlertDialog.Builder(getContext())
-                        .setTitle("Solicitando entrega")
-                        .setMessage("Valor: R$ "+ preco)
-                        .setPositiveButton("Aceitar", null)
-                        .setNegativeButton("Recusar", null)
+                        .setTitle("RESUMO")
+                        .setMessage("Produto: "+tilProduto.getEditText().getText().toString()+"\n\n" +
+                                tilObs.getEditText().getText().toString()+"\n\n" +
+                                "Origem: "+origem+"\n" +
+                                "Destino: "+destino+"\n\n" +
+                                "Valor: R$ "+ preco)
+                        .setPositiveButton("Confirmar", null)
+                        .setNegativeButton("Voltar", null)
                         .show();
 
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);//se clicar em sim
@@ -90,16 +97,12 @@ public class EntregaAddFragment extends Fragment {
                         Toast.makeText(getActivity(), "Entrega solicitada!.", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
-//                        fabContinuaCadastro.setEnabled(true);
-//                        fabContinuaCadastro.setVisibility(View.VISIBLE);
-
-
-//                        Intent itn = new Intent(getApplicationContext(), CadastroCompeticaoActivity.class);
-
-//                        viewCadastraCompeticao.launch(itn);
+                        chamaListagem();
                     }
                 });
             }
+
+
         };
     }
 
@@ -111,6 +114,24 @@ public class EntregaAddFragment extends Fragment {
                 preco);
 
         new EntregaService().createEntrega(accessToken, entregaDTO);
+    }
+
+    private void chamaListagem() {
+
+        EntregasFragment ent = new EntregasFragment();
+
+        //--------
+        Bundle args = new Bundle();
+        args.putString("navClicado", "entregasAtuais");
+        ent.setArguments(args);
+        //--------
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment_content_main,//inicia a transacao///indica aonde o fragmento será trocado
+                ent);//qual fragmento será inserido
+
+        transaction.commit();
     }
 
     @Override
