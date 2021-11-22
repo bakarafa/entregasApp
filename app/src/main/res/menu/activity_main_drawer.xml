@@ -10,6 +10,10 @@
             android:icon="@android:drawable/ic_lock_idle_lock"
             android:title="@string/txtEntrar" />
         <item
+            android:id="@+id/nav_add_user_adm_moto"
+            android:icon="@android:drawable/stat_notify_more"
+            android:title="@string/txtAddUser" />
+        <item
             android:id="@+id/nav_add_entrega_cliente"
             android:icon="@android:drawable/stat_notify_more"
             android:title="@string/txtAddEntrega"

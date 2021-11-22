@@ -36,6 +36,8 @@ import com.vianna.entregasapp.databinding.ActivityMainBinding;
 import com.vianna.entregasapp.model.dto.LoginDTO;
 import com.vianna.entregasapp.ui.entregas.EntregaAddFragment;
 import com.vianna.entregasapp.ui.entregas.EntregasFragment;
+import com.vianna.entregasapp.ui.home.HomeFragment;
+import com.vianna.entregasapp.ui.usuario.UsuarioAddFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -147,6 +149,21 @@ public class MainActivity extends AppCompatActivity {
 
                     changeFragment(ent);
 
+                } else if (item.getItemId() == R.id.nav_add_user_adm_moto){//CADASTRO DE USUARIO
+                    UsuarioAddFragment ent = new UsuarioAddFragment();
+
+                    //--------
+                    Bundle args = new Bundle();
+                    if (userLogado!=null && userLogado.getROLE().equals("admin")){//minusculo mesmo
+                        args.putString("navClicado", "addMotoboy");
+                    } else {
+                        args.putString("navClicado", "addCliente");
+                    }
+                    ent.setArguments(args);
+                    //--------
+
+                    changeFragment(ent);
+
                 } else if (item.getItemId() == R.id.nav_sair_all){//FAZER LOGOUT
                     atualizaMenuDeslogado();
 
@@ -161,7 +178,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Até mais!",
                             Toast.LENGTH_SHORT).show();
 
-                    finish();
+                    HomeFragment ent = new HomeFragment();
+                    changeFragment(ent);
                 }
 
                 DrawerLayout drawer = binding.drawerLayout;//drawer é o menuzinho com as opções
@@ -243,14 +261,17 @@ public class MainActivity extends AppCompatActivity {
         if (userLogado.getROLE().equals("CLIENTE")) {
             ivFotoNavBar.setImageResource(R.drawable.client_consumer_customer_user_avatar_icon);
             navigationView.getMenu().findItem(R.id.nav_add_entrega_cliente).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Minhas Entregas");
                     } else if (userLogado.getROLE().equals("MOTOBOY")) {
             ivFotoNavBar.setImageResource(R.drawable.motoboy);
             navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas em Andamento");
             navigationView.getMenu().findItem(R.id.nav_entregas_aguardando_moto).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setVisible(false);
         } else {
             ivFotoNavBar.setImageResource(R.drawable.administrator_user_icon);
             navigationView.getMenu().findItem(R.id.nav_entregas_finalizadas_all).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setTitle("Cadastrar Motoboy");
             navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas Atuais");
         }
 
@@ -271,6 +292,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().findItem(R.id.nav_add_entrega_cliente).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_entregas_aguardando_moto).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_entregas_finalizadas_all).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setTitle("Cadastrar Cliente");
 
 
         ivFotoNavBar.setImageResource(R.mipmap.ic_launcher_round);

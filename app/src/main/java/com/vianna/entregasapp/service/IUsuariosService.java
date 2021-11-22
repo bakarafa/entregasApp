@@ -17,12 +17,14 @@ import retrofit2.http.Path;
 public interface IUsuariosService {
 
     @POST("usuarios/motoboy")//admin
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
     public Call<UsuarioDTO> salvaNovoMotoboy(@Header("Authorization")String token,
                                           @Body UsuarioDTO novoMotoboy);//salva novo motoboy
 
     @POST("usuarios/cliente")//admin
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    public Call<UsuarioDTO> salvaNovoCliente(@Header("Authorization")String token,
-                                             @Body UsuarioDTO novoCliente);//salva novo cliente
+    public Call<UsuarioDTO> salvaNovoCliente(@Body UsuarioDTO novoCliente);//salva novo cliente
+
+//    @POST("usuarios/cliente")//admin
+//    @Headers({"Content-Type: application/x-www-form-urlencoded"})
+//    public Call<UsuarioDTO> salvaNovoCliente(@Header("Authorization")String token,
+//                                             @Body UsuarioDTO novoCliente);//salva novo cliente
 }

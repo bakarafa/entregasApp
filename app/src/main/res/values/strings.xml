@@ -35,4 +35,7 @@
     <string name="txtCadastroEntregas">Cadastro de Entrega</string>
     <string name="txtSolicitarEntrega">Solicitar Entrega</string>
     <string name="txtentregasAll">nome_dinamico_entregas_all</string>
+    <string name="txtAddNewUser">Novo Usuário</string>
+    <string name="txtAddUser">Cadastrar Cliente</string>
+    <string name="txtAdicionarUsuario">Cadastrar Usuário</string>
 </resources>

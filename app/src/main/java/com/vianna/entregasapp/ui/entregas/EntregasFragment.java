@@ -64,7 +64,6 @@ public class EntregasFragment extends Fragment {
         setaAdapter();
 
         Log.i("ENTREGAS", "RETORNO BASEADO NO ROLE: "+entregas.size());
-
     }
 
     private void buscaListaParaCarregar() {
