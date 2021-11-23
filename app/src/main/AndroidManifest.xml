@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EntregasApp">
         <activity
+            android:name=".EntregaDetalheActivity"
+            android:exported="false" />
+        <activity
             android:name=".CadNovaEntregaActivity"
             android:exported="false" />
         <activity

@@ -1,9 +1,14 @@
 package com.vianna.entregasapp.ui.entregas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -99,10 +104,29 @@ public class EntregasFragment extends Fragment {
 
 
     private void setaAdapter() {
-        EntregaAdapter adapter = new EntregaAdapter(entregas);
+        EntregaAdapter adapter = new EntregaAdapter(entregas, viewEntregaDetalhe);//tag:linha2 passar para o adapter em seu construtor
         rvListagemEntregas.setAdapter(adapter);
 
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         rvListagemEntregas.setLayoutManager(layout);
     }
+
+
+    ActivityResultLauncher<Intent> viewEntregaDetalhe = registerForActivityResult(//tag:linha01 criar launcher - passar para adapter
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {//será executado ao retornar
+
+//                    if (result.getResultCode() == 10){
+//                        int pos = result.getData().getExtras().getInt("posicaoLancouNota");//tag:linhaRetorno 09-recebe a posicao da linha alterada
+//                        double nota = result.getData().getDoubleExtra("novaNota", 0.00);//tag:linhaRetorno 09-recebe o novo valor da nota
+//                        ((ArtigoAdapter)recVieArtigos.getAdapter()).atualizaHolder(pos, nota);//tag:linhaRetorno 10-chama o metodo que ira
+//
+//                    }
+                }
+            }
+    );
+
+
 }
