@@ -7,12 +7,13 @@
     tools:context=".ui.usuario.UsuarioAddFragment">
 
     <TextView
-        android:id="@+id/tvAddNewUSer"
+        android:id="@+id/tvNovoUsuarioTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/txtAddNewUser"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +27,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddNewUSer">
+        app:layout_constraintTop_toBottomOf="@+id/tvNovoUsuarioTitulo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

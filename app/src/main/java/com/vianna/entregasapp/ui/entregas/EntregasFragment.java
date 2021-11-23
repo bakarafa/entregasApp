@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.vianna.entregasapp.R;
 import com.vianna.entregasapp.adapter.entregas.EntregaAdapter;
@@ -28,7 +29,10 @@ import java.util.ArrayList;
 
 public class EntregasFragment extends Fragment {
 
+
     //-----
+    TextView tvTituloPagina;
+
     RecyclerView rvListagemEntregas;
     ArrayList<EntregaDTO> entregas;
     String accessToken, ROLE, navClicado;
@@ -41,6 +45,8 @@ public class EntregasFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_entregas, container, false);//define qual fragment será carregada ao abrir
         rvListagemEntregas = rootView.findViewById(R.id.rvListagemEntregas);
+
+        tvTituloPagina = rootView.findViewById(R.id.rvListagemEntregasTitulo);
 
         //-----acesso ao token
         SharedPreferences prefs = this.getActivity().getSharedPreferences("entregasApp", Context.MODE_PRIVATE);
@@ -75,18 +81,23 @@ public class EntregasFragment extends Fragment {
         if (ROLE.equals("CLIENTE")){
             if (navClicado.equals("entregasAtuais")){
                 entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasAguardandoETransitoClienteLogado(accessToken);
+                tvTituloPagina.setText("Entregas em Andamento");
             } else if (navClicado.equals("historico")){
                 entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasFinalizadasClienteLogado(accessToken);
+                tvTituloPagina.setText("Entregas Encerradas");
             } else {
 //                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasClienteLogado(accessToken);//tudo
             }
         } else if (ROLE.equals("MOTOBOY")){
             if (navClicado.equals("entregasAtuais")){
                 entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasEmTransitoMotoboyLogado(accessToken);
+                tvTituloPagina.setText("Entregas em Andamento");
             } else if (navClicado.equals("historico")){
                 entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasFinalizadasMotoboyLogado(accessToken);
+                tvTituloPagina.setText("Entregas Encerradas");
             } else if (navClicado.equals("aguardando")){
                 entregas = (ArrayList<EntregaDTO>) new EntregaService().getEntregasAguardando(accessToken);
+                tvTituloPagina.setText("Entregas Disponiveis");
             } else {
 //                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasMotoboyLogado(accessToken);
             }
@@ -94,8 +105,10 @@ public class EntregasFragment extends Fragment {
         } else {//ADM
             if (navClicado.equals("entregasAtuais")){
                 entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasAguardandoETransitoAdm(accessToken);
+                tvTituloPagina.setText("Entregas em Andamento");
             } else if (navClicado.equals("historico")){
                 entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasFinalziadasAdm(accessToken);
+                tvTituloPagina.setText("Entregas Encerradas");
             } else {
 //                entregas = (ArrayList<EntregaDTO>) new EntregaService().getTodasEntregasTodosMotoboys(accessToken);
             }

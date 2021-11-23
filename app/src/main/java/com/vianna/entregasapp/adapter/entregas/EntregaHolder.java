@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,12 +12,18 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vianna.entregasapp.EntregaDetalheActivity;
+import com.vianna.entregasapp.MainActivity;
 import com.vianna.entregasapp.R;
 import com.vianna.entregasapp.model.dto.EntregaDTO;
 import com.vianna.entregasapp.service.EntregaService;
+import com.vianna.entregasapp.ui.entregas.EntregasFragment;
 
 import java.util.Locale;
 
@@ -99,6 +106,9 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 new EntregaService().aceitaEntrega(accessToken, entregaDTO);
+
+                chamaListagemAtuais();
+
                 Toast.makeText(view.getContext(), "Entrega aceita!",
                         Toast.LENGTH_SHORT).show();
             }
@@ -110,6 +120,8 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 new EntregaService().finalizaEntrega(accessToken, entregaDTO);
+
+                chamaListagemHistorico();
 
                 Toast.makeText(view.getContext(), "Entrega finalizada!",
                         Toast.LENGTH_SHORT).show();
@@ -141,6 +153,44 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
         if (!(ROLE.equals("MOTOBOY") && entregaDTO.getStatus().equals("AGUARDANDO"))){
             clickNaLinha(itemView);
         }
+    }
+
+    private void chamaListagemHistorico() {
+
+        EntregasFragment ent = new EntregasFragment();
+
+        //--------
+        Bundle args = new Bundle();
+        args.putString("navClicado", "historico");
+        ent.setArguments(args);
+        //--------
+
+        FragmentManager fragmentManager = ((AppCompatActivity)itemView.getContext()).getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment_content_main,//inicia a transacao///indica aonde o fragmento será trocado
+                ent);//qual fragmento será inserido
+
+        transaction.commit();
+    }
+
+    private void chamaListagemAtuais() {
+
+        EntregasFragment ent = new EntregasFragment();
+
+        //--------
+        Bundle args = new Bundle();
+        args.putString("navClicado", "entregasAtuais");
+        ent.setArguments(args);
+        //--------
+
+        FragmentManager fragmentManager = ((AppCompatActivity)itemView.getContext()).getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        transaction.replace(R.id.nav_host_fragment_content_main,//inicia a transacao///indica aonde o fragmento será trocado
+                ent);//qual fragmento será inserido
+
+        transaction.commit();
     }
 
 

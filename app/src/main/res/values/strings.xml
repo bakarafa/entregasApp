@@ -33,10 +33,10 @@
     <string name="txtFazerPedido">Fazer Pedido</string>
     <string name="txtCadastroDePedidos">Cadastro de Pedidos</string>
     <string name="txtCadastroEntregas">Cadastro de Entrega</string>
-    <string name="txtSolicitarEntrega">Solicitar Entrega</string>
+    <string name="txtSolicitarEntrega">Solicitar</string>
     <string name="txtentregasAll">Entregas em Andamento</string>
     <string name="txtAddNewUser">Novo Usuário</string>
     <string name="txtAddUser">Novo Cliente</string>
-    <string name="txtAdicionarUsuario">Cadastrar Usuário</string>
+    <string name="txtAdicionarUsuario">Cadastrar</string>
     <string name="txtAceitarEntrega">Aceitar</string>
 </resources>

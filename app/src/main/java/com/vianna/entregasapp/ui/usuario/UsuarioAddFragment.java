@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,6 +27,7 @@ public class UsuarioAddFragment extends Fragment {
 
     TextInputLayout tilNome, tilCpf, tilIdade, tilTelefone, tilEndereco, tilEmail, tilSenha;
     Button btnSalvar;
+    TextView tvTituloPaginaAddUser;
 
     String accessToken, navClicado;
 
@@ -42,6 +44,8 @@ public class UsuarioAddFragment extends Fragment {
         //-----
 
         binding();
+
+
 
         registraEventos();
 
@@ -115,6 +119,7 @@ public class UsuarioAddFragment extends Fragment {
         tilEmail = rootView.findViewById(R.id.tilAddUserEmail);
         tilSenha = rootView.findViewById(R.id.tilAddUserSenha);
         btnSalvar = rootView.findViewById(R.id.btnAddUser);
+        tvTituloPaginaAddUser = rootView.findViewById(R.id.tvNovoUsuarioTitulo);
     }
 
     @Override
@@ -128,6 +133,12 @@ public class UsuarioAddFragment extends Fragment {
         super.onStart();
 
         navClicado = getArguments().getString("navClicado");
+
+        if (navClicado.equals("addMotoboy")){
+            tvTituloPaginaAddUser.setText("Novo Motoboy");
+        } else {
+            tvTituloPaginaAddUser.setText("Novo Cliente");
+        }
 
     }
 
