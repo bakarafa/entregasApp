@@ -118,7 +118,36 @@ public class EntregaService {
     }
 
     //METODOS MOTOBOY
-    public List<EntregaDTO> getTodasEntregasMotoboyLogado(String accessToken) {//cliente
+
+    public void aceitaEntrega(String accessToken, EntregaDTO entregaDTO) {//motoboy
+        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+
+        Call<EntregaDTO> chamada = service.aceitaEntrega("Bearer "+accessToken, entregaDTO.getIdentrega());//prepara para fazer a busca de todos of filmes
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            chamada.execute().body();
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+        }
+    }
+
+    public void finalizaEntrega(String accessToken, EntregaDTO entregaDTO) {//motoboy
+        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+
+        Call<EntregaDTO> chamada = service.finalizaEntrega("Bearer "+accessToken, entregaDTO.getIdentrega(), entregaDTO);//prepara para fazer a busca de todos of filmes
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            chamada.execute().body();
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+        }
+    }
+
+    public List<EntregaDTO> getTodasEntregasMotoboyLogado(String accessToken) {//motoboy
         Retrofit r = new RetrofitConfig().getRetrofit();
         IEntregaService service = r.create(IEntregaService.class);
 
@@ -133,7 +162,7 @@ public class EntregaService {
         }
     }
 
-    public List<EntregaDTO> getEntregasFinalizadasMotoboyLogado(String accessToken) {
+    public List<EntregaDTO> getEntregasFinalizadasMotoboyLogado(String accessToken) {//motoboy
         Retrofit r = new RetrofitConfig().getRetrofit();
         IEntregaService service = r.create(IEntregaService.class);
 
@@ -149,7 +178,7 @@ public class EntregaService {
         }
     }
 
-    public List<EntregaDTO> getEntregasEmTransitoMotoboyLogado(String accessToken) {//cliente
+    public List<EntregaDTO> getEntregasEmTransitoMotoboyLogado(String accessToken) {//motoboy
         Retrofit r = new RetrofitConfig().getRetrofit();
         IEntregaService service = r.create(IEntregaService.class);
 
@@ -179,6 +208,23 @@ public class EntregaService {
             return null;
         }
     }
+
+    public EntregaDTO getUmaEntregaMotoboy(String accessToken, int id) {//motoboy
+        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+
+        Call<EntregaDTO> chamada = service.getUmaEntregaMotoboy("Bearer "+accessToken, id);//prepara para fazer a busca de todos of filmes
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            return chamada.execute().body();
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
+
 
 //    public List<EntregaDTO> getEntregasAguardandoMotoboyLogado(String accessToken) {//cliente
 //        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
@@ -219,6 +265,22 @@ public class EntregaService {
 
 
     //METODOS CLIENTE
+
+    public EntregaDTO getUmaEntregaCliente(String accessToken, int id) {//cliente
+        Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
+        IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
+
+        Call<EntregaDTO> chamada = service.getUmaEntregaCliente("Bearer "+accessToken, id);//prepara para fazer a busca de todos of filmes
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            return chamada.execute().body();
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
     public List<EntregaDTO> getTodasEntregasClienteLogado(String accessToken) {//cliente
         Retrofit r = new RetrofitConfig().getRetrofit();
         IEntregaService service = r.create(IEntregaService.class);

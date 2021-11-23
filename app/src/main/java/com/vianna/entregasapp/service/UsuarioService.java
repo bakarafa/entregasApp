@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 
 public class UsuarioService {
 
-    public void salvaMotoboy(String accessToken, UsuarioDTO usuario) {//cliente
+    public void salvaMotoboy(String accessToken, UsuarioDTO usuario) {//adm
         Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
         IUsuariosService service = r.create(IUsuariosService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
 
@@ -26,7 +26,7 @@ public class UsuarioService {
         }
     }
 
-    public void salvaCliente(UsuarioDTO usuario) {//cliente
+    public void salvaCliente(UsuarioDTO usuario) {//nao precisa estar logado
         Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
         IUsuariosService service = r.create(IUsuariosService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
 

@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tilLogin.getEditText().setText("a@a");//apagar
+                tilLogin.getEditText().setText("gu@gu");//apagar
                 tilSenha.getEditText().setText("123");//apagar
             }
         };

@@ -18,7 +18,7 @@
     <string name="txtSenha">Senha</string>
     <string name="txtAddEntrega">Nova Entrega</string>
     <string name="txtEntregasDisponiveis">Entregas Disponiveis</string>
-    <string name="txtEntregasHistorico">Entregas Historico</string>
+    <string name="txtEntregasHistorico">Entregas Encerradas</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtNome">Nome</string>
     <string name="txtCPF">CPF</string>
@@ -34,8 +34,9 @@
     <string name="txtCadastroDePedidos">Cadastro de Pedidos</string>
     <string name="txtCadastroEntregas">Cadastro de Entrega</string>
     <string name="txtSolicitarEntrega">Solicitar Entrega</string>
-    <string name="txtentregasAll">nome_dinamico_entregas_all</string>
+    <string name="txtentregasAll">Entregas em Andamento</string>
     <string name="txtAddNewUser">Novo Usuário</string>
-    <string name="txtAddUser">Cadastrar Cliente</string>
+    <string name="txtAddUser">Novo Cliente</string>
     <string name="txtAdicionarUsuario">Cadastrar Usuário</string>
+    <string name="txtAceitarEntrega">Aceitar</string>
 </resources>

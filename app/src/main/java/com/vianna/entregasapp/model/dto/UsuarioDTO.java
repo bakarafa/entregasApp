@@ -1,6 +1,8 @@
 package com.vianna.entregasapp.model.dto;
 
-public class UsuarioDTO {
+import java.io.Serializable;
+
+public class UsuarioDTO implements Serializable {
 
     private int id;
     private String nome,cpf, idade, telefone, endereco,email,senha;

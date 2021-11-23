@@ -33,8 +33,13 @@ public interface IEntregaService {
 
     @GET("entrega/{id}")//cliente
     @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    public Call<EntregaDTO> getUmaEntrega(@Header("Authorization")String token,
-                                                @Path("id") int idEntrega);//dados de uma unica entrega
+    public Call<EntregaDTO> getUmaEntregaCliente(@Header("Authorization")String token,
+                                                 @Path("id") int idEntrega);//dados de uma unica entrega do cliente
+
+    @GET("entrega/motoboy/my/{id}")//motoboy
+    @Headers({"Content-Type: application/x-www-form-urlencoded"})
+    public Call<EntregaDTO> getUmaEntregaMotoboy(@Header("Authorization")String token,
+                                          @Path("id") int idEntrega);//dados de uma unica entrega do motoboy
 
     @GET("entrega/motoboy/my")//motoboy
     @Headers({"Content-Type: application/x-www-form-urlencoded"})
@@ -60,15 +65,22 @@ public interface IEntregaService {
 //                                             @Field("bairroDestino") String bairroDestino,
 //                                             @Field("obs") String obs);//cria uma nova entrega
 
+//    @PUT("entrega/motoboy/{id}/aceitar")//motoboy
+//    @Headers({"Content-Type: application/x-www-form-urlencoded"})
+//    public Call<EntregaDTO> aceitaEntrega(@Header("Authorization")String token,
+//                                          @Path("id") int idEntrega,
+//                                          @Body EntregaDTO entrega);//aceita uma entrega
+
     @PUT("entrega/motoboy/{id}/aceitar")//motoboy
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
     public Call<EntregaDTO> aceitaEntrega(@Header("Authorization")String token,
-                                          @Path("id") int idEntrega,
-                                          @Body EntregaDTO entrega);//aceita uma entrega
+                                          @Path("id") int idEntrega);//aceita uma entrega
 
     @PUT("entrega/motoboy/{id}/finalizar")//motoboy
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
     public Call<EntregaDTO> finalizaEntrega(@Header("Authorization")String token,
                                           @Path("id") int idEntrega,
                                           @Body EntregaDTO entrega);//finaliza uma entrega
+
+//    @PUT("entrega/motoboy/{id}/finalizar")//motoboy
+//    public Call<EntregaDTO> finalizaEntrega(@Header("Authorization")String token,
+//                                            @Path("id") int idEntrega);//finaliza uma entrega
 }

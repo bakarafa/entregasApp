@@ -24,6 +24,7 @@ public class EntregaAdapter extends RecyclerView.Adapter<EntregaHolder> {
         this.resultLauncher = resultLauncher;//tag:linha4.1
     }
 
+    
     @NonNull
     @Override
     public EntregaHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

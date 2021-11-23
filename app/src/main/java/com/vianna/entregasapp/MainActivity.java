@@ -262,17 +262,17 @@ public class MainActivity extends AppCompatActivity {
             ivFotoNavBar.setImageResource(R.drawable.client_consumer_customer_user_avatar_icon);
             navigationView.getMenu().findItem(R.id.nav_add_entrega_cliente).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Minhas Entregas");
+//            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas em Andamento");
                     } else if (userLogado.getROLE().equals("MOTOBOY")) {
             ivFotoNavBar.setImageResource(R.drawable.motoboy);
-            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas em Andamento");
+//            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas em Andamento");
             navigationView.getMenu().findItem(R.id.nav_entregas_aguardando_moto).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setVisible(false);
         } else {
             ivFotoNavBar.setImageResource(R.drawable.administrator_user_icon);
             navigationView.getMenu().findItem(R.id.nav_entregas_finalizadas_all).setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setTitle("Cadastrar Motoboy");
-            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas Atuais");
+            navigationView.getMenu().findItem(R.id.nav_add_user_adm_moto).setTitle("Novo Motoboy");
+//            navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setTitle("Entregas em Andamento");
         }
 
         navigationView.getMenu().findItem(R.id.nav_entregas_atuais_all).setVisible(true);//entregas aparece pra todos mas o nome muda de acordo com o ROLE

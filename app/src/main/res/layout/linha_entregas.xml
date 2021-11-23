@@ -4,15 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="54dp">
+
+    <TextView
+        android:id="@+id/tvEntregasLinhaNumero"
+        android:layout_width="67dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvStatusAdmOnly"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvEntregasDadosLinha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tvEntregasLinhaNumero"
+        app:layout_constraintTop_toBottomOf="@+id/tvEntregasLinhaNumero" />
+
+    <TextView
+        android:id="@+id/tvStatusAdmOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="⬤"
+        android:textColor="#F44336"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEntregasLinhaPreco"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEntregasLinhaNumero" />
+
+    <Button
+        android:id="@+id/btnAceitarEntregaMotoboy"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="36dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:enabled="true"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:icon="@android:drawable/stat_notify_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnFinalizarEntregaMotoboy"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="36dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:icon="@android:drawable/stat_sys_download"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
