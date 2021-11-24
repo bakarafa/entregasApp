@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -123,7 +126,13 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
 
                         new EntregaService().aceitaEntrega(accessToken, entregaDTO);//salva
 
-                        chamaListagemAtuais();
+                        //chama detalhe entrega adicionada
+                        Intent itt = new Intent(view.getContext(), EntregaDetalheActivity.class);
+                        itt.putExtra("entregaLinha", entregaDTO);
+
+                        resultLauncher.launch(itt);
+
+//                        chamaListagemAtuais();
 
                         Toast.makeText(view.getContext(), "Entrega aceita com sucesso!",
                                 Toast.LENGTH_SHORT).show();
@@ -155,7 +164,7 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
 
                         new EntregaService().finalizaEntrega(accessToken, entregaDTO);
 
-                        chamaListagemHistorico();
+                        chamaListagemAtuais();
 
                         Toast.makeText(view.getContext(), "Entrega encerrada com sucesso!!",
                                 Toast.LENGTH_SHORT).show();
@@ -169,6 +178,17 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
             }
         };
     }
+
+//    ActivityResultLauncher<Intent> viewEntregaDetalhe = itemView.getContext().registerForActivityResult(
+//            new ActivityResultContracts.StartActivityForResult(),
+//            new ActivityResultCallback<ActivityResult>() {
+//                @Override
+//                public void onActivityResult(ActivityResult result) {//será executado ao retornar
+//
+////                    chamaListagemAtuais();
+//                }
+//            }
+//    );
 
     private void enableBotoes() {
         if (ROLE.equals("MOTOBOY") && entregaDTO.getStatus().equals("AGUARDANDO")){

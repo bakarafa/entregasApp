@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.vianna.entregasapp.model.dto.EntregaDTO;
@@ -16,6 +17,7 @@ import java.util.Locale;
 
 public class EntregaDetalheActivity extends AppCompatActivity {
     TextView tvNumero, tvStatus, tvClienteMotboy, tvOrigem, tvDestino, tvProduto, tvObs, tvPreco;
+    Button btnVoltar;
     EntregaDTO entrega;
     //    int posicao;
 
@@ -38,9 +40,21 @@ public class EntregaDetalheActivity extends AppCompatActivity {
 
         entrega = (EntregaDTO) getIntent().getExtras().getSerializable("entregaLinha");//recebe via intent
 
+        btnVoltar.setOnClickListener(voltar());
 
         preeenche();
     }
+
+    private View.OnClickListener voltar() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        };
+    }
+
+
 
     private void preeenche() {
 
@@ -92,5 +106,6 @@ public class EntregaDetalheActivity extends AppCompatActivity {
         tvProduto = findViewById(R.id.tvEntregaDetalheProduto);
         tvObs = findViewById(R.id.tvEntregaDetalheObs);
         tvPreco = findViewById(R.id.tvEntregaDetalhePreco);
+        btnVoltar = findViewById(R.id.btnDetalheVoltar);
     }
 }

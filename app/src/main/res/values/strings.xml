@@ -32,11 +32,12 @@
     <string name="txtObs">Observação</string>
     <string name="txtFazerPedido">Fazer Pedido</string>
     <string name="txtCadastroDePedidos">Cadastro de Pedidos</string>
-    <string name="txtCadastroEntregas">Cadastro de Entrega</string>
+    <string name="txtCadastroEntregas">Nova Entrega</string>
     <string name="txtSolicitarEntrega">Solicitar</string>
     <string name="txtentregasAll">Entregas em Andamento</string>
     <string name="txtAddNewUser">Novo Usuário</string>
     <string name="txtAddUser">Novo Cliente</string>
     <string name="txtAdicionarUsuario">Cadastrar</string>
     <string name="txtAceitarEntrega">Aceitar</string>
+    <string name="txtVoltar">Voltar</string>
 </resources>

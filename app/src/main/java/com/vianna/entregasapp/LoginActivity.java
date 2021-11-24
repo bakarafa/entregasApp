@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         registraEventos();
 
-        loginInserido();//só pra nao precisar digitar login e senha / APAGAR DEPOIS
+//        loginInserido();//só pra nao precisar digitar login e senha / APAGAR DEPOIS
     }
 
     private void loginInserido() {
@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 tilLogin.getEditText().setText("ze@ze");//apagar
                 tilSenha.getEditText().setText("123");//apagar
+
             }
         };
 

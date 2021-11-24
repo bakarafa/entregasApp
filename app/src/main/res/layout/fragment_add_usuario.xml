@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/tilAddUserNome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tilAddUserNome">
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilAddUserCpf"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,6 +64,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilAddUserIdade"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,6 +81,7 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/tilAddUserTelefone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -96,6 +100,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/tilAddUserEndereco"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -114,6 +119,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/tilAddUserEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -131,6 +137,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/tilAddUserSenha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -149,7 +156,7 @@
 
     <Button
         android:id="@+id/btnAddUser"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"

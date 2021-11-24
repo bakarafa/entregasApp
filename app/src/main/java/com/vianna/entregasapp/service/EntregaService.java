@@ -119,7 +119,7 @@ public class EntregaService {
 
     //METODOS MOTOBOY
 
-    public void aceitaEntrega(String accessToken, EntregaDTO entregaDTO) {//motoboy
+    public EntregaDTO aceitaEntrega(String accessToken, EntregaDTO entregaDTO) {//motoboy
         Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
         IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
 
@@ -127,9 +127,10 @@ public class EntregaService {
 
         try {
             Log.i("TODAS ENTREGAS", "Caiu no try.");
-            chamada.execute().body();
+            return chamada.execute().body();
         } catch (IOException e) {
             Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
         }
     }
 
@@ -362,7 +363,7 @@ public class EntregaService {
 
 
 
-    public void createEntrega(String accessToken, EntregaDTO entregaDTO) {//cliente
+    public EntregaDTO createEntrega(String accessToken, EntregaDTO entregaDTO) {//cliente
         Retrofit r = new RetrofitConfig().getRetrofit();//pega a variavel que é o servico a ser consumido
         IEntregaService service = r.create(IEntregaService.class);//utiliza o retrofit para criar dinamicamente uma classe que implementa a IFilmeService (logo precisa imlementar todos os metodos da interface)
 
@@ -370,9 +371,10 @@ public class EntregaService {
 
         try {
             Log.i("TODAS ENTREGAS", "Caiu no try.");
-            chamada.execute().body();
+            return chamada.execute().body();
         } catch (IOException e) {
             Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
         }
     }
 

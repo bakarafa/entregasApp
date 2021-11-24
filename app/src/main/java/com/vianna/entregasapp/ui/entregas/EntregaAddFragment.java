@@ -1,8 +1,13 @@
 package com.vianna.entregasapp.ui.entregas;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -19,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.vianna.entregasapp.EntregaDetalheActivity;
 import com.vianna.entregasapp.R;
 import com.vianna.entregasapp.model.dto.EntregaDTO;
 import com.vianna.entregasapp.service.EntregaService;
@@ -91,13 +97,12 @@ public class EntregaAddFragment extends Fragment {
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        dialog.dismiss();
+
 
                         salvaEntrega();
 
-                        Toast.makeText(getActivity(), "Entrega solicitada!.", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-
-                        chamaListagem();
+//                        chamaListagem();
                     }
                 });
             }
@@ -113,7 +118,18 @@ public class EntregaAddFragment extends Fragment {
                 tilObs.getEditText().getText().toString(),
                 preco);
 
-        new EntregaService().createEntrega(accessToken, entregaDTO);
+        entregaDTO = new EntregaService().createEntrega(accessToken, entregaDTO);
+
+        Toast.makeText(getActivity(), "Entrega solicitada!.", Toast.LENGTH_SHORT).show();
+
+
+
+        //chama detalhe entrega adicionada
+        Intent itt = new Intent(getContext(), EntregaDetalheActivity.class);
+        itt.putExtra("entregaLinha", entregaDTO);
+
+        viewEntregaDetalhe.launch(itt);
+
     }
 
     private void chamaListagem() {
@@ -163,6 +179,17 @@ public class EntregaAddFragment extends Fragment {
         spiOrigem.setAdapter(adapter);
         spiDestino.setAdapter(adapter);
     }
+
+    ActivityResultLauncher<Intent> viewEntregaDetalhe = registerForActivityResult(//tag:linha01 criar launcher - passar para adapter
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {//será executado ao retornar
+
+                    chamaListagem();
+                }
+            }
+    );
 
     private void binding() {
         tilProduto = rootView.findViewById(R.id.tilAddEntregaProduto);
