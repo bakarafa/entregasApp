@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -105,12 +106,31 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new EntregaService().aceitaEntrega(accessToken, entregaDTO);
 
-                chamaListagemAtuais();
 
-                Toast.makeText(view.getContext(), "Entrega aceita!",
-                        Toast.LENGTH_SHORT).show();
+                //alerta
+                final AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
+                        .setTitle("Aceitar a entrega #"+entregaDTO.getIdentrega()+"?")
+                        .setMessage("Produto: "+entregaDTO.getProduto())
+                        .setPositiveButton("Sim", null)
+                        .setNegativeButton("Não", null)
+                        .show();
+
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);//se clicar em sim
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        new EntregaService().aceitaEntrega(accessToken, entregaDTO);//salva
+
+                        chamaListagemAtuais();
+
+                        Toast.makeText(view.getContext(), "Entrega aceita com sucesso!",
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
             }
         };
     }
@@ -119,12 +139,33 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new EntregaService().finalizaEntrega(accessToken, entregaDTO);
 
-                chamaListagemHistorico();
+                //alerta
+                final AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
+                        .setTitle("Encerrar a entrega #"+entregaDTO.getIdentrega()+"?")
+                        .setMessage("Produto: "+entregaDTO.getProduto()+"\n\nValor: "+entregaDTO.getPreco())
+                        .setPositiveButton("Sim", null)
+                        .setNegativeButton("Não", null)
+                        .show();
 
-                Toast.makeText(view.getContext(), "Entrega finalizada!",
-                        Toast.LENGTH_SHORT).show();
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);//se clicar em sim
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        new EntregaService().finalizaEntrega(accessToken, entregaDTO);
+
+                        chamaListagemHistorico();
+
+                        Toast.makeText(view.getContext(), "Entrega encerrada com sucesso!!",
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+
+
+
             }
         };
     }

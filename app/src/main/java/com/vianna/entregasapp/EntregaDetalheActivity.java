@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -65,8 +66,15 @@ public class EntregaDetalheActivity extends AppCompatActivity {
             }
         }
 
-        tvNumero.setText(Integer.toString(entrega.getIdentrega()));
+        tvNumero.setText("#"+Integer.toString(entrega.getIdentrega()));
+
+
         tvStatus.setText(entrega.getStatus());
+        if (entrega.getStatus().equals("TRANSITO")){
+            tvStatus.setTextColor(Color.GREEN);
+        } else if (entrega.getStatus().equals("AGUARDANDO")){
+            tvStatus.setTextColor(Color.BLUE);
+        }
 
         tvOrigem.setText("Origem: "+entrega.getRegiaoDeOrigem());
         tvDestino.setText("Destino: "+entrega.getRegiaoDeDestino());

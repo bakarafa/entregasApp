@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +99,21 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         //----------------------fim
 
+    }
+
+    long back_pressed;
+
+    @Override//duas vezes back para voltar
+    public void onBackPressed() {
+        if (back_pressed + 1000 > System.currentTimeMillis()){
+            super.onBackPressed();
+        }
+        else{
+            Toast.makeText(getBaseContext(),
+                    "Pressione voltar novamente para sair!", Toast.LENGTH_SHORT)
+                    .show();
+        }
+        back_pressed = System.currentTimeMillis();
     }
 
     //----------------------inicio---NAV BOTOES
