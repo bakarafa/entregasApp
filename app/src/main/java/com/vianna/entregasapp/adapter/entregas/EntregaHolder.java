@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +40,8 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
 
     String accessToken, ROLE;
 
+    EditText input = new EditText(itemView.getContext());//pro motoboy colocar comentario
+
     int posicao;
     private ActivityResultLauncher<Intent> resultLauncher;//tag:linha6 criar variavel que receberá o resultlauncher
 
@@ -51,6 +57,23 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
         //-----
 
         binding();
+
+
+
+        input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                input.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        InputMethodManager inputMethodManager= (InputMethodManager) itemView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT);
+                    }
+                });
+            }
+        });
+
+
 
 
 
@@ -155,13 +178,26 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
 
+
+                if (input.getParent() != null) {
+                    ((ViewGroup) input.getParent()).removeView(input);
+                }
+
+                input.requestFocus();
+
                 //alerta
                 final AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
-                        .setTitle("Encerrar a entrega #"+entregaDTO.getIdentrega()+"?")
-                        .setMessage("Produto: "+entregaDTO.getProduto()+"\n\nValor: "+String.format(Locale.US, "%.2f",new Validations().calcularGanhoMotoboy(entregaDTO.getPreco())))
-                        .setPositiveButton("Sim", null)
-                        .setNegativeButton("Não", null)
+                        .setView(input)
+                        .setTitle("Entrega #"+entregaDTO.getIdentrega())
+                        .setMessage(
+                                "Produto: "+entregaDTO.getProduto()+
+                                "\nCliente: "+entregaDTO.getCliente().getNome()+
+                                "\nValor: "+String.format(Locale.US, "%.2f",new Validations().calcularGanhoMotoboy(entregaDTO.getPreco()))+
+                                "\n\n\nComentário:")
+                        .setPositiveButton("Encerrar", null)
+                        .setNegativeButton("Voltar", null)
                         .show();
+
 
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);//se clicar em sim
                 positiveButton.setOnClickListener(new View.OnClickListener() {
@@ -180,13 +216,12 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
                         dialog.dismiss();
                     }
                 });
-
-
-
-
             }
         };
+
     }
+
+
 
     private void atualizaGanhoNavMenu() {
         MainActivity act = (MainActivity)itemView.getContext();
