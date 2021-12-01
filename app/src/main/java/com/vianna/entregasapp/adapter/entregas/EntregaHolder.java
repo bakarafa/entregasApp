@@ -10,14 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,6 +80,7 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
         tvStatus = itemView.findViewById(R.id.tvStatusAdmOnly);
         btnAceitaEntrega = itemView.findViewById(R.id.btnAceitarEntregaMotoboy);
         btnFinalizaEntrega = itemView.findViewById(R.id.btnFinalizarEntregaMotoboy);
+
     }
 
     public void preencheLinha(EntregaDTO entregaDTO, int posicao) {
@@ -92,12 +89,26 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
 
         tvNumeroEntrega.setText("#"+entregaDTO.getIdentrega());
         tvDadosEntrega.setText(entregaDTO.getProduto());
-        tvValorEntrega.setText("R$ "+String.format(Locale.US, "%.1f",entregaDTO.getPreco()));
+
+        if (ROLE.equals("MOTOBOY")) {
+            tvValorEntrega.setText("R$ " + String.format(Locale.US, "%.2f", calcularGanhoMotoboy(entregaDTO.getPreco())));
+        } else {
+            tvValorEntrega.setText("R$ " + String.format(Locale.US, "%.2f", entregaDTO.getPreco()));
+        }
+
+
 
         enableBotoes();//motoboy
         atualizaBolinhaStatus();
         habilitaClickNaLinha();
         registraEventos();
+    }
+
+    private double calcularGanhoMotoboy(double preco) {
+        double porcentagem = 80.0 / 100.0;//80% eh da empresa
+        preco = preco - (porcentagem * preco);
+
+        return preco;
     }
 
     private void registraEventos() {
@@ -152,7 +163,7 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
                 //alerta
                 final AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
                         .setTitle("Encerrar a entrega #"+entregaDTO.getIdentrega()+"?")
-                        .setMessage("Produto: "+entregaDTO.getProduto()+"\n\nValor: "+entregaDTO.getPreco())
+                        .setMessage("Produto: "+entregaDTO.getProduto()+"\n\nValor: "+String.format(Locale.US, "%.2f",calcularGanhoMotoboy(entregaDTO.getPreco())))
                         .setPositiveButton("Sim", null)
                         .setNegativeButton("Não", null)
                         .show();
@@ -164,7 +175,10 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
 
                         new EntregaService().finalizaEntrega(accessToken, entregaDTO);
 
+                        atualizaGanhoNavMenu();
+
                         chamaListagemAtuais();
+
 
                         Toast.makeText(view.getContext(), "Entrega encerrada com sucesso!!",
                                 Toast.LENGTH_SHORT).show();
@@ -177,6 +191,11 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
 
             }
         };
+    }
+
+    private void atualizaGanhoNavMenu() {
+        MainActivity act = (MainActivity)itemView.getContext();
+        act.setaSaldo();
     }
 
 //    ActivityResultLauncher<Intent> viewEntregaDetalhe = itemView.getContext().registerForActivityResult(

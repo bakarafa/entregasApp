@@ -225,6 +225,32 @@ public class EntregaService {
         }
     }
 
+    public Double getGanhosMotoboyLogado(String accessToken) {//motoboy
+        Retrofit r = new RetrofitConfig().getRetrofit();
+        IEntregaService service = r.create(IEntregaService.class);
+
+        Call<List<EntregaDTO>> chamada = service.getAllEntregasMotoboy("Bearer "+accessToken);
+
+        try {
+            Log.i("TODAS ENTREGAS", "Caiu no try.");
+            retornaEntregue(chamada.execute().body());//monta a lista com as ENTREGUES
+
+            double saldo = 0.0;
+            for (EntregaDTO ent:listaRetorno) {//pra cada entrega somar o valor
+               saldo+=ent.getPreco();
+            }
+
+            double porcentagem = 80.0 / 100.0;//80% eh da empresa
+            saldo = saldo - (porcentagem * saldo);
+
+            return saldo;
+
+        } catch (IOException e) {
+            Log.i("TODAS ENTREGAS", "Caiu no catch.");
+            return null;
+        }
+    }
+
 
 
 //    public List<EntregaDTO> getEntregasAguardandoMotoboyLogado(String accessToken) {//cliente

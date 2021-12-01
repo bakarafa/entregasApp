@@ -34,10 +34,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.vianna.entregasapp.databinding.ActivityMainBinding;
 import com.vianna.entregasapp.model.dto.LoginDTO;
+import com.vianna.entregasapp.service.EntregaService;
 import com.vianna.entregasapp.ui.entregas.EntregaAddFragment;
 import com.vianna.entregasapp.ui.entregas.EntregasFragment;
 import com.vianna.entregasapp.ui.home.HomeFragment;
 import com.vianna.entregasapp.ui.usuario.UsuarioAddFragment;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     //----------------------inicio
     NavigationView navigationView;
     ImageView ivFotoNavBar;
-    TextView cpNome, cpEmail;
+    TextView cpNome, cpEmail, cpGanhos;
     LoginDTO userLogado;
     //----------------------fim
 
@@ -298,6 +301,18 @@ public class MainActivity extends AppCompatActivity {
 
         cpNome.setText(userLogado.getNome());
         cpEmail.setText(userLogado.getEmail());
+        setaSaldo();//seta o saldo que mostra no meu de acordo com a ROLE
+
+
+
+    }
+
+    public void setaSaldo() {
+        if (userLogado.getROLE().equals("MOTOBOY")) {
+            double ganhos = new EntregaService().getGanhosMotoboyLogado(userLogado.getAccess_token());
+
+            cpGanhos.setText("Ganhos: R$ "+String.format(Locale.US, "%.2f", ganhos));
+        }
     }
 
     private void atualizaMenuDeslogado() {
@@ -315,6 +330,7 @@ public class MainActivity extends AppCompatActivity {
         ivFotoNavBar.setImageResource(R.mipmap.ic_launcher_round);
         cpNome.setText(getResources().getString(R.string.nav_header_title));//coloca o texto que está no strings.xml
         cpEmail.setText(getResources().getString(R.string.nav_header_subtitle));//coloca o texto que está no strings.xml
+        cpGanhos.setText("");
 
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.activity_main_drawer);
@@ -326,6 +342,7 @@ public class MainActivity extends AppCompatActivity {
     private void vinculo() {
         cpNome =  navigationView.getHeaderView(0).findViewById(R.id.nhNome);
         cpEmail =  navigationView.getHeaderView(0).findViewById(R.id.nhEmail);
+        cpGanhos =  navigationView.getHeaderView(0).findViewById(R.id.nhGanhos);
         ivFotoNavBar = navigationView.getHeaderView(0).findViewById(R.id.iv_foto);
     }
     //----------------------fim

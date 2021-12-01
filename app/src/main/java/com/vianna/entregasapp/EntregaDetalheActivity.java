@@ -94,7 +94,7 @@ public class EntregaDetalheActivity extends AppCompatActivity {
         tvDestino.setText("Destino: "+entrega.getRegiaoDeDestino());
         tvProduto.setText("Produto: "+entrega.getProduto());
         tvObs.setText("Obs: "+entrega.getObs());
-        tvPreco.setText("Valor: R$ "+String.format(Locale.US, "%.1f",entrega.getPreco()));
+        tvPreco.setText("Valor: R$ "+String.format(Locale.US, "%.2f",entrega.getPreco()));
     }
 
     private void binding() {

@@ -32,6 +32,7 @@ import com.vianna.entregasapp.util.Validations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EntregaAddFragment extends Fragment {
 
@@ -88,7 +89,7 @@ public class EntregaAddFragment extends Fragment {
                                 tilObs.getEditText().getText().toString()+"\n\n" +
                                 "Origem: "+origem+"\n" +
                                 "Destino: "+destino+"\n\n" +
-                                "Valor: R$ "+ preco)
+                                "Valor: R$ "+ String.format(Locale.US, "%.2f",preco))
                         .setPositiveButton("Confirmar", null)
                         .setNegativeButton("Voltar", null)
                         .show();
