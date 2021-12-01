@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.vianna.entregasapp.model.dto.EntregaDTO;
 import com.vianna.entregasapp.service.EntregaService;
+import com.vianna.entregasapp.util.Validations;
 
 import java.util.Locale;
 
@@ -94,7 +95,12 @@ public class EntregaDetalheActivity extends AppCompatActivity {
         tvDestino.setText("Destino: "+entrega.getRegiaoDeDestino());
         tvProduto.setText("Produto: "+entrega.getProduto());
         tvObs.setText("Obs: "+entrega.getObs());
-        tvPreco.setText("Valor: R$ "+String.format(Locale.US, "%.2f",entrega.getPreco()));
+
+        if (ROLE.equals("MOTOBOY")) {
+            tvPreco.setText("Ganho: R$ " + String.format(Locale.US, "%.2f", new Validations().calcularGanhoMotoboy(entrega.getPreco())));
+        } else {
+            tvPreco.setText("Valor: R$ " + String.format(Locale.US, "%.2f", entrega.getPreco()));
+        }
     }
 
     private void binding() {

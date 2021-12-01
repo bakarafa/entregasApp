@@ -24,6 +24,7 @@ import com.vianna.entregasapp.R;
 import com.vianna.entregasapp.model.dto.EntregaDTO;
 import com.vianna.entregasapp.service.EntregaService;
 import com.vianna.entregasapp.ui.entregas.EntregasFragment;
+import com.vianna.entregasapp.util.Validations;
 
 import java.util.Locale;
 
@@ -91,7 +92,7 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
         tvDadosEntrega.setText(entregaDTO.getProduto());
 
         if (ROLE.equals("MOTOBOY")) {
-            tvValorEntrega.setText("R$ " + String.format(Locale.US, "%.2f", calcularGanhoMotoboy(entregaDTO.getPreco())));
+            tvValorEntrega.setText("R$ " + String.format(Locale.US, "%.2f", new Validations().calcularGanhoMotoboy(entregaDTO.getPreco())));
         } else {
             tvValorEntrega.setText("R$ " + String.format(Locale.US, "%.2f", entregaDTO.getPreco()));
         }
@@ -104,12 +105,6 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
         registraEventos();
     }
 
-    private double calcularGanhoMotoboy(double preco) {
-        double porcentagem = 80.0 / 100.0;//80% eh da empresa
-        preco = preco - (porcentagem * preco);
-
-        return preco;
-    }
 
     private void registraEventos() {
         btnFinalizaEntrega.setOnClickListener(finalizaEntrega());
@@ -163,7 +158,7 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
                 //alerta
                 final AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
                         .setTitle("Encerrar a entrega #"+entregaDTO.getIdentrega()+"?")
-                        .setMessage("Produto: "+entregaDTO.getProduto()+"\n\nValor: "+String.format(Locale.US, "%.2f",calcularGanhoMotoboy(entregaDTO.getPreco())))
+                        .setMessage("Produto: "+entregaDTO.getProduto()+"\n\nValor: "+String.format(Locale.US, "%.2f",new Validations().calcularGanhoMotoboy(entregaDTO.getPreco())))
                         .setPositiveButton("Sim", null)
                         .setNegativeButton("Não", null)
                         .show();

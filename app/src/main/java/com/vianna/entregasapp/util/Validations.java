@@ -32,4 +32,11 @@ public class Validations {
             return true;//retorna true
         }
     }
+
+    public static double calcularGanhoMotoboy(double preco) {
+        double porcentagem = 80.0 / 100.0;//80% eh da empresa
+        preco = preco - (porcentagem * preco);
+
+        return preco;
+    }
 }
