@@ -191,7 +191,7 @@ public class EntregaHolder extends RecyclerView.ViewHolder {
                         .setTitle("Entrega #"+entregaDTO.getIdentrega())
                         .setMessage(
                                 "Produto: "+entregaDTO.getProduto()+
-                                "\nCliente: "+entregaDTO.getCliente().getNome()+
+//                                "\nCliente: "+entregaDTO.getCliente().getNome()+
                                 "\nValor: "+String.format(Locale.US, "%.2f",new Validations().calcularGanhoMotoboy(entregaDTO.getPreco()))+
                                 "\n\n\nComentário:")
                         .setPositiveButton("Encerrar", null)
